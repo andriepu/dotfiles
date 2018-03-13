@@ -1,0 +1,60 @@
+# ~/.tmuxinator/bukalapak.yml
+
+name: bukalapak
+root: ~/Bukalapak/
+
+windows:
+  - editor:
+      pre:
+          - cd mothership
+      layout: main-vertical
+      panes:
+          - vim:
+            - set_pane_title "Vim"
+            - vim
+  - open-space:
+      layout: main-vertical
+      panes:
+          - mothership-git:
+            - set_pane_title "Git"
+            - bl_to_mothership
+          - rails_console:
+            - set_pane_title "Rails Console"
+            - bl_rails_c
+  - main-servers:
+      pre:
+          - bl_services
+      layout: tiled
+      panes:
+          - aleppo:
+              - set_pane_title "Aleppo"
+              - bl_aleppo
+          - foreman:
+              - set_pane_title "Foreman"
+              - bl_foreman
+          - haproxy:
+              - set_pane_title "Haproxy"
+              - bl_haproxy
+          - marcopolo:
+              - set_pane_title "Marcopolo"
+              - bl_marcopolo
+          - morph:
+              - set_pane_title "Morph"
+              - bl_morph
+          - palaver:
+              - set_pane_title "Palaver"
+              - bl_palaver
+          - palaver-bulk:
+              - set_pane_title "Palaver Bulk"
+              - bl_palaver_bulk
+  - pending-servers:
+      layout: tiled
+      panes:
+          - palaver-search:
+              - set_pane_title "Palaver Search"
+          - protypo:
+              - set_pane_title "Protypo"
+          - splitter:
+              - set_pane_title "Splitter"
+          - splitter-dashboard:
+              - set_pane_title "Splitter Dashboard"

@@ -8,6 +8,9 @@ source $DOTFILES_DIR/zsh/plugins.zsh
 
 # Tmuxinator {{{
 #
+# set tmuxinator projects folder
+export TMUXINATOR_CONFIG=$DOTFILES_DIR/workspace/tmuxinator
+
 source $DOTFILES_DIR/.tmuxinator
 #
 # # }}}
