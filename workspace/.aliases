@@ -24,9 +24,9 @@ alias bl_aleppo="to_go_src; cd aleppo; ./aleppo"
 
 alias bl_marcopolo="to_bl; cd marcopolo; npm start"
 
-alias bl_haproxy="to_bl; cd morph; terminate_port 8888; haproxy -f haproxy.cfg"
+alias bl_haproxy="to_bl; cd badumts; terminate_port 8888; haproxy -f haproxy.cfg"
 
-alias bl_morph="to_bl; cd morph; npm run dev"
+alias bl_badumts="to_bl; cd badumts; npm run dev"
 
 alias bl_rails_c="to_bl; cd mothership; bl_rvm_use; rails c"
 
