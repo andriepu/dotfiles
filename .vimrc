@@ -6,10 +6,10 @@ scriptencoding utf-8
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
@@ -28,6 +28,8 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'tommcdo/vim-lion'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-abolish'
+Plug 'brooth/far.vim'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 "
