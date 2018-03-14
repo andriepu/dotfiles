@@ -26,7 +26,7 @@ alias bl_marcopolo="to_bl; cd marcopolo; npm start"
 
 alias bl_haproxy="to_bl; cd badumts; terminate_port 8888; haproxy -f haproxy.cfg"
 
-alias bl_badumts="to_bl; cd badumts; npm run dev"
+alias bl_badumts="to_bl; cd badumts; npm start"
 
 alias bl_rails_c="to_bl; cd mothership; bl_rvm_use; rails c"
 
