@@ -47,4 +47,10 @@ bindkey "^[[B" history-substring-search-down
 #
 # }}}
 
+# Plugins - zsh-history-substring-search {{{
+#
+bindkey '^P' autosuggest-accept
+#
+# }}}
+
 # vim:set foldmethod=marker foldlevel=0:
