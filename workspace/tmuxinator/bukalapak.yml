@@ -40,7 +40,6 @@ windows:
               - bl_marcopolo
           - badumts:
               - set_pane_title "Badumts"
-              - bl_badumts
           - palaver:
               - set_pane_title "Palaver"
               - bl_palaver

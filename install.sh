@@ -8,6 +8,7 @@ symlinks=(
   .zshrc
   .vimrc
   .tmux.conf
+  .tmuxinator.conf
 )
 
 # Helpers {{{

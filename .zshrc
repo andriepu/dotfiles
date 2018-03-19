@@ -13,7 +13,7 @@ source $DOTFILES_DIR/zsh/plugins.zsh
 # set tmuxinator projects folder
 export TMUXINATOR_CONFIG=$DOTFILES_DIR/workspace/tmuxinator
 
-source $DOTFILES_DIR/tmuxinator/.tmuxinator.conf
+source $DOTFILES_DIR/.tmuxinator.conf
 #
 # # }}}
 
