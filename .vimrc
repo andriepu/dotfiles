@@ -30,6 +30,7 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-abolish'
 Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'iamcco/markdown-preview.vim'
 
 call plug#end()
 "
