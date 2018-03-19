@@ -230,7 +230,7 @@ let g:airline#extensions#ale#enabled = 1
 "
 " }}}
 
-" LeaderF {{{
+" Plugin - LeaderF {{{
 "
 let g:Lf_DefaultMode='FullPath'
 "
@@ -243,6 +243,14 @@ let g:vim_json_syntax_conceal = 1
 "
 " }}}
 
+" Plugin - markdown-preview {{{
+"
+nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
+imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
+imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+"
+" }}}
 
 set modelines=1
 " vim:set foldmethod=marker foldlevel=0:
