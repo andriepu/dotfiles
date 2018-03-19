@@ -34,13 +34,13 @@ alias to_go_src="cd ~/Go/src/github.com/bukalapak"
 
 alias bl_to_mothership="to_bl; cd mothership; bl_rvm_use; gst"
 
-alias bl_foreman="to_bl; cd mothership; bl_rvm_use; terminate_port 5000; bl_fs"
+alias bl_foreman="to_bl; cd mothership; bl_rvm_use; bl_fs"
 
 alias bl_aleppo="to_go_src; cd aleppo; ./aleppo"
 
 alias bl_marcopolo="to_bl; cd marcopolo; npm start"
 
-alias bl_haproxy="to_bl; cd badumts; terminate_port 8888; haproxy -f haproxy.cfg"
+alias bl_haproxy="to_bl; cd badumts; haproxy -f haproxy.cfg"
 
 alias bl_badumts="to_bl; cd badumts; npm start"
 
