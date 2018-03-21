@@ -40,12 +40,16 @@ windows:
               - bl_marcopolo
           - badumts:
               - set_pane_title "Badumts"
+              - bl_badumts
           - palaver:
               - set_pane_title "Palaver"
               - bl_palaver
           - palaver-bulk:
               - set_pane_title "Palaver Bulk"
               - bl_palaver_bulk
+          - splitter:
+              - set_pane_title "Splitter"
+              - bl_splitter
   - pending-servers:
       layout: tiled
       panes:
@@ -53,7 +57,5 @@ windows:
               - set_pane_title "Palaver Search"
           - protypo:
               - set_pane_title "Protypo"
-          - splitter:
-              - set_pane_title "Splitter"
           - splitter-dashboard:
               - set_pane_title "Splitter Dashboard"
