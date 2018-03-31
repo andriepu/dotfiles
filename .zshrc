@@ -2,6 +2,7 @@ DOTFILES_DIR=~/dotfiles
 
 # Zsh {{{
 #
+source $DOTFILES_DIR/zsh/init.zsh
 source $DOTFILES_DIR/zsh/exports.zsh
 source $DOTFILES_DIR/zsh/aliases.zsh
 source $DOTFILES_DIR/zsh/plugins.zsh

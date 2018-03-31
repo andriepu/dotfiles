@@ -1,12 +1,6 @@
-# Plugin Manager - Zplug {{{
-#
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-#
-# }}}
-
 # Plugins {{{
 #
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "zdharma/fast-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
@@ -22,7 +16,13 @@ zplug "plugins/git", from:oh-my-zsh
 # Themes {{{
 #
 # zplug "themes/robbyrussell", from:oh-my-zsh
-zplug 'themes/sorin', from:oh-my-zsh
+# zplug 'themes/sorin', from:oh-my-zsh
+# zplug 'themes/agnoster', from:oh-my-zsh
+# zplug 'themes/bira', from:oh-my-zsh
+
+# zplug maniat1k/birame, use:birame.zsh-theme, from:github, as:theme
+zplug "$DOTFILES_DIR/zsh/themes", use:"ardh.zsh-theme", from:local, as:theme
+# zplug jamiewilson/predawn-shell, use:Predawn.zsh-theme, from:github, as:theme
 #
 # }}}
 
@@ -35,10 +35,10 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+# }}}
 
 # source plugins and add commands to $PATH
 zplug load
-# }}}
 
 # Plugins - zsh-history-substring-search {{{
 #

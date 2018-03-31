@@ -46,11 +46,11 @@ alias bl_badumts="to_bl; cd badumts; npm start"
 
 alias bl_rails_c="to_bl; cd mothership; bl_rvm_use; rails c"
 
-alias bl_palaver="to_bl; cd palaver; source .env; iex --sname master@localhost -S mix"
+alias bl_palaver="to_bl; cd palaver; source .env; iex --name master@127.0.0.1 -S mix"
 
 alias bl_palaver_bulk="to_bl; cd palaver-bulk; source .env; iex -S mix"
 
-alias bl_palaver_search="to_bl; cd palaver-search; source .env; iex -S mix"
+alias bl_palaver_search="to_bl; cd palaver-search; source .env; iex --name search@127.0.0.1 -S mix"
 
 alias bl_protypo="to_go_src; cd protypo; ./protypo"
 
