@@ -49,12 +49,4 @@ alias ewalias="$EDITOR $DOTFILES_DIR/workspace/.aliases"
 #
 # }}}
 
-# Tmuxinator {{{
-#
-set_pane_title() {
-  printf "\033]2;$1\033\\"
-}
-#
-# }}}
-
 # vim:set syn=sh foldmethod=marker foldlevel=0:

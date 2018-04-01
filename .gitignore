@@ -1,2 +1,4 @@
 backups
 !backups/.keep
+
+.DS_Store
