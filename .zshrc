@@ -1,4 +1,4 @@
-DOTFILES_DIR=~/dotfiles
+DOTFILES_DIR=$HOME/dotfiles
 
 # Zsh {{{
 #
