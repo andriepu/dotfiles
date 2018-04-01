@@ -1,5 +1,3 @@
-#!/bin/bash
-
 namespace=DOTFILES
 
 hclear() {
