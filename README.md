@@ -49,4 +49,4 @@ I'll try to make it well documented, so if you want to follow what the old man s
    . ./install.sh
    `
 
-7. Adjust some settings to match your local environtment by reading it
+7. Adjust some settings to match your local environment by [reading it](https://github.com/andriepu/dotfiles/blob/master/README.md#what-is-in-it)
