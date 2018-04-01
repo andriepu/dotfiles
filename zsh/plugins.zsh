@@ -8,7 +8,7 @@ zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-bd"
 zplug "ael-code/zsh-colored-man-pages"
 zplug "johnhamelink/rvm-zsh"
-zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "lib/clipboard", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 #
 # }}}
