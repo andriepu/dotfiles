@@ -20,8 +20,6 @@ source $DOTFILES_DIR/specific/zsh/aliases.zsh
 #
 # set tmuxinator projects folder
 export TMUXINATOR_CONFIG=$DOTFILES_DIR/specific/tmuxinator_projects
-
-source $DOTFILES_DIR/.tmuxinator
 #
 # # }}}
 

@@ -3,7 +3,6 @@ SYMLINK_LIST=(
   .zshrc
   .vimrc
   .tmux.conf
-  .tmuxinator
 )
 
 # List of files to be installed

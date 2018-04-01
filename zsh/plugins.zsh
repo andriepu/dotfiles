@@ -1,6 +1,7 @@
 # Plugins {{{
 #
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "tmuxinator/tmuxinator", from:github, use:"completion/tmuxinator.zsh"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
