@@ -6,11 +6,11 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Imports {{{
 #
 # Order matters
-source ${DOTFILES_DIR}/setup/colors.sh
-source ${DOTFILES_DIR}/setup/hashmap.sh
+source ${DOTFILES_DIR}/install/colors.sh
+source ${DOTFILES_DIR}/install/hashmap.sh
 
-source ${DOTFILES_DIR}/setup/declarations.sh
-source ${DOTFILES_DIR}/setup/confirmations.sh
+source ${DOTFILES_DIR}/install/declarations.sh
+source ${DOTFILES_DIR}/install/confirmations.sh
 #
 # }}}
 

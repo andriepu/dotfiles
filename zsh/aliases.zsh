@@ -57,6 +57,4 @@ set_pane_title() {
 #
 # }}}
 
-source $DOTFILES_DIR/workspace/.aliases
-
 # vim:set syn=sh foldmethod=marker foldlevel=0:

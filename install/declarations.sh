@@ -23,7 +23,7 @@ then
   # OSX
   hput installDep zsh "brew install zplug"
   hput installDep tmux "gem install tmuxinator"
-  hput installDep vim "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  hput installDep vim "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
   hput installPkg zsh "brew install zsh"
   hput installPkg tmux "brew install tmux"
@@ -36,7 +36,7 @@ else
   # Ubuntu or Else
   hput installDep zsh "sudo apt-get install zplug"
   hput installDep tmux "gem install tmuxinator"
-  hput installDep vim "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  hput installDep vim "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
   hput installPkg zsh "sudo apt-get install zsh"
   hput installPkg tmux "sudo apt-get install tmux"
