@@ -53,19 +53,6 @@ done
 #
 # }}}
 
-# Ask for updating dotfiles {{{
-#
-print_in_blue "\nUpdating Source Code"
-print_in_blue "\n--------------------------------"
-printf "\n"
-ask_for_confirmation "Update dotfiles from repository"
-if answer_is_yes;
-then
-  git pull origin master
-fi
-#
-# }}}
-
 # Creating symlinks to be placed in $HOME {{{
 #
 print_in_blue "\nCreating Symlinks"
