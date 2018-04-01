@@ -16,9 +16,9 @@ I'll try to make it well documented, so if you want to follow what the old man s
 
 ## What is in it?
 1. Backup of your old configurations (if it exists)
-2. ZSH configurations
-3. Tmux configurations
-4. Vim configurations
+2. [ZSH configurations](https://github.com/andriepu/dotfiles/blob/master/readme/zsh.md)
+3. [Tmux configurations](https://github.com/andriepu/dotfiles/blob/master/readme/tmux.md)
+4. [Vim configurations](https://github.com/andriepu/dotfiles/blob/master/readme/vim.md)
 
 
 ## Setup
