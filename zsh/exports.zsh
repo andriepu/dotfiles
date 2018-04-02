@@ -15,4 +15,11 @@ source $ZPLUG_HOME/init.zsh
 #
 # }}}
 
+# Tmuxinator {{{
+#
+# set tmuxinator projects folder
+export TMUXINATOR_CONFIG=$DOTFILES_DIR/specific/tmuxinator_projects
+#
+# # }}}
+
 # vim:set syn=sh foldmethod=marker foldlevel=0:

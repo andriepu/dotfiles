@@ -16,13 +16,6 @@ source $DOTFILES_DIR/specific/zsh/aliases.zsh
 #
 # }}}
 
-# Tmuxinator {{{
-#
-# set tmuxinator projects folder
-export TMUXINATOR_CONFIG=$DOTFILES_DIR/specific/tmuxinator_projects
-#
-# # }}}
-
 # Should be written last
 source $DOTFILES_DIR/zsh/nyan.zsh
 
