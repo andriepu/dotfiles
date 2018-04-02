@@ -4,7 +4,6 @@
 alias sudo="sudo "
 
 alias r!="source ~/.zshrc; echo 'zshrc reloaded'"
-alias cls="clear"
 
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 #
