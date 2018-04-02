@@ -3,7 +3,7 @@
 # Enable aliases to be sudo’ed
 alias sudo="sudo "
 
-alias reload!="source ~/.zshrc; echo 'zshrc reloaded'"
+alias r!="source ~/.zshrc; echo 'zshrc reloaded'"
 alias cls="clear"
 
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
