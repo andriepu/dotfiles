@@ -1,7 +1,7 @@
 # Kill process with given PORT
 # Usage: terminate_port 8888 -> will kill all process associated with 8888
 terminate_port() {
-  lsof -ti:$1 | xargs kill -9
+  lsof -ti:$1 | xargs kill -15
 }
 
 # Set pane title for Tmux

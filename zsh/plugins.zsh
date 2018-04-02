@@ -22,7 +22,7 @@ zplug "plugins/git", from:oh-my-zsh
 # zplug 'themes/bira', from:oh-my-zsh
 
 # zplug maniat1k/birame, use:birame.zsh-theme, from:github, as:theme
-zplug "$DOTFILES_DIR/zsh/themes", use:"ardh.zsh-theme", from:local, as:theme
+zplug "$DOTFILES_DIR/themes/zsh", use:"ardh.zsh-theme", from:local, as:theme
 # zplug jamiewilson/predawn-shell, use:Predawn.zsh-theme, from:github, as:theme
 #
 # }}}
