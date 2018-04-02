@@ -1,11 +1,10 @@
 DOTFILES_DIR=$HOME/dotfiles
 
-# Zsh {{{
-#
 source $DOTFILES_DIR/zsh/init.zsh
 source $DOTFILES_DIR/zsh/colors.zsh
 source $DOTFILES_DIR/zsh/exports.zsh
 source $DOTFILES_DIR/zsh/functions.zsh
+source $DOTFILES_DIR/zsh/binding.zsh
 source $DOTFILES_DIR/zsh/aliases.zsh # require: exports.zsh
 source $DOTFILES_DIR/zsh/plugins.zsh # require: init.zsh, exports.zsh
 
@@ -13,10 +12,6 @@ source $DOTFILES_DIR/zsh/plugins.zsh # require: init.zsh, exports.zsh
 source $DOTFILES_DIR/specific/zsh/exports.zsh
 source $DOTFILES_DIR/specific/zsh/functions.zsh
 source $DOTFILES_DIR/specific/zsh/aliases.zsh
-#
-# }}}
 
 # Should be written last
 source $DOTFILES_DIR/zsh/nyan.zsh
-
-# vim:set foldmethod=marker foldlevel=0:
