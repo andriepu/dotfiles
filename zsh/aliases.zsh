@@ -44,7 +44,7 @@ alias ll='ls -GFhl'
 alias ehosts="sudo $EDITOR /etc/hosts"
 alias ezplug="$EDITOR $DOTFILES_DIR/zsh/plugins.zsh"
 alias ealias="$EDITOR $DOTFILES_DIR/zsh/aliases.zsh"
-alias ewalias="$EDITOR $DOTFILES_DIR/workspace/.aliases"
+alias espalias="$EDITOR $DOTFILES_DIR/specific/zsh/aliases.zsh"
 #
 # }}}
 
