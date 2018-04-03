@@ -3,9 +3,9 @@
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "tmuxinator/tmuxinator", from:github, use:"completion/tmuxinator.zsh"
 zplug "zdharma/fast-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "djui/alias-tips"
+zplug "zsh-users/zsh-history-substring-search"
 zplug "Tarrasch/zsh-bd"
 zplug "ael-code/zsh-colored-man-pages"
 zplug "johnhamelink/rvm-zsh"
@@ -50,8 +50,11 @@ bindkey "^[[B" history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# styling
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=green,bold'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=green'
+
+# unique results only
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
 #
 # }}}
