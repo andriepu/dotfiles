@@ -45,10 +45,14 @@ zplug load
 #
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+
+# vim mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 #
 # }}}
 
-# Plugins - zsh-history-substring-search {{{
+# Plugins - zsh-autosuggestions {{{
 #
 bindkey '^P' autosuggest-accept
 #
