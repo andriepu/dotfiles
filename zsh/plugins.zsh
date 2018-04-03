@@ -49,6 +49,10 @@ bindkey "^[[B" history-substring-search-down
 # vim mode
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=green,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=green'
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
 #
 # }}}
 
