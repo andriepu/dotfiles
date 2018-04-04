@@ -182,3 +182,7 @@ This file means to contain aliases that help us to shorten syntax. It requires e
 #### `plugins.zsh`
 
 `plugins.zsh` is special. It has its own [documentation page]().
+
+#### `nyan.zsh`
+
+print **legendary nyan cat** every time terminal is started up.
