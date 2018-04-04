@@ -181,8 +181,8 @@ This file means to contain aliases that help us to shorten syntax. It requires e
 
 #### `plugins.zsh`
 
-`plugins.zsh` is special. It has its own [documentation page]().
+`plugins.zsh` is special. It has its own [documentation page](https://github.com/andriepu/dotfiles/blob/master/readme/zsh-plugins.md).
 
 #### `nyan.zsh`
 
-print **legendary nyan cat** every time terminal is started up.
+print **legendary nyan cat** to greet you every time you open terminal.
