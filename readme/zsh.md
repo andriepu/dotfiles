@@ -5,47 +5,29 @@ When I started this dotfiles, I have a commitment to know every details that I w
 I'm using [zplug](https://github.com/zplug/zplug) to mantain the plugins. I found it clearer and more flexible to use compared to the other plugin managers I tried. Just read the [zplug repository](https://github.com/zplug/zplug) if you want to understand more about it.
 
 ### `.zshrc`
-Basically, `.zshrc` is just an index file that sourcing from the other files. Separated zsh configurations are in `zsh/` folder. The things that you should keep in mind about this file is:
-- **```DOTFILES_DIR=$HOME/dotfiles```**
+- Basically, `.zshrc` is just an index file that sourcing from the other files. Separated zsh configurations are in `zsh/` folder. The things that you should keep in mind about this file is:
+  - **```DOTFILES_DIR=$HOME/dotfiles```**
 
-  You can change the value of this variable depending on where you clone your forked dotfiles. In the [Setup tutorial](https://github.com/andriepu/dotfiles/blob/master/README.md#setup), I encourage you to clone it in `$HOME` directory, so leave it as it is will be OK.
+    You can change the value of this variable depending on where you clone your forked dotfiles. In the [Setup tutorial](https://github.com/andriepu/dotfiles/blob/master/README.md#setup), I encourage you to clone it in `$HOME` directory, so leave it as it is will be OK.
 
-- **The order of sourcing files**
-  
-  Some files need to be sourced below the other files. For that case, There will be `require: ...` comment beside them. In example:
+  - **The order of sourcing files**
 
-  ```source $DOTFILES_DIR/zsh/aliases.zsh # require: exports.zsh```
-  
+    Some files need to be sourced below the other files. For that case, There will be `require: ...` comment beside them. In example:
+
+    **```source $DOTFILES_DIR/zsh/aliases.zsh # require: exports.zsh```**
+
   It means that `aliases.zsh` must be sourced below the `exports.zsh`
  
-- **`specific/` folder and files**
+  - **`specific/` folder and files**
 
-  I've mentioned that dotfiles is `machine-specific`. So to make it easier, I put the machine-specific into the `specific/` folder. It means that everything under that folder are must be **emptied**, **fully deleted**, or **changed** based on your local machine.
+    I've mentioned that dotfiles is `machine-specific`. So to make it easier, I put the machine-specific into the `specific/` folder. It means that everything under that folder are must be **emptied**, **fully deleted**, or **changed** based on your local machine.
   
-  If you were a `bash` user, all of your old settings that should be copied are either on `~/.bashrc` or `~/.bash_profile`
+    If you were a `bash` user, all of your old settings that should be copied are either on `~/.bashrc` or `~/.bash_profile`
  
 ---
 ### `zsh/`
  
-#### `init.zsh`
-This file means to laod initial dependencies used for others.
-
-- `compdef` is currently used by **tmuxinator** in `plugins.zsh`, so we need to check the existence of the `compdef` command when we starting `zsh`. If it didn't exist, we load `compinit` which are the module containing `compdef`.
-
-  ```
-  if [ command -v compdef >/dev/null 2>&1 ];
-  then
-    autoload -Uz compinit
-
-    if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-      compinit;
-    else
-      compinit -C;
-    fi;
-  ```
-
 #### `colors.zsh`
-This file means to contain color variables that can be used by others.
 
 - Usage: **` echo -e "${Red}${Bold}Red_Bold ${Red}Red ${BRed}Red ${Color_Off}No_Color" `**
 
@@ -60,7 +42,6 @@ This file means to contain color variables that can be used by others.
 - `-e` in the examples above mean to execute `echo` with parsing the escaped characters. Those color variables are using escaped characters.
 
 #### `exports.zsh`
-This file means to contain variables that exposed to `ENV`
 
 - **` export EDITOR="vim" `**
 
@@ -78,7 +59,6 @@ This file means to contain variables that exposed to `ENV`
   projects folder (usually at `~/.config/tmuxinator/` on macOS) into `$DOTFILES_DIR/specific/tmuxinator_projects/`. So, when you create a new tmuxinator project, it will be created inside dotfiles directory. This way, it will be easier for you to backup your tmuxinator projects.
 
 #### `functions.zsh`
-This file means to contain functions used by others.
 
 - **`terminate_port`**
   
@@ -92,7 +72,6 @@ This file means to contain functions used by others.
 
 
 #### `bindings.zsh`
-This file means to contain custom bindings.
 
 - **`bindkey -v`**
   
@@ -108,97 +87,14 @@ This file means to contain custom bindings.
 
 
 #### `aliases.zsh`
-This file means to contain aliases that help us to shorten syntax. It requires exports.zsh
 
-- **`alias sudo="sudo "`**
-  
-  > A trailing space in VALUE causes the next word to be checked for alias substitution when the alias is expanded.
-  — [[man pages]](http://www.linuxcommand.org/lc3_man_pages/aliash.html)
-  
-  It makes us to be able running `sudo somealias`.
-
-- **`alias r!="source ~/.zshrc; echo 'zshrc reloaded'"`**
-
-  Easy way to reload `.zshrc`.
-
-- **`alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"`**
-  
-  Delete `.DS_Store` files recursively.
-
-- **Shorter `cd`**
-
-  ```
-  alias ..="cd .."
-  alias ...="cd ../.."
-  alias ....="cd ../../.."
-  alias .....="cd ../../../.."
-  alias ~="cd ~"
-  alias -- -="cd -"
-  ```
-  
-  It just shorter syntax to use `cd`
-
-- **Verbose processes**
-  
-  ```
-  alias mv='mv -v'
-  alias rm='rm -i -v'
-  alias cp='cp -v'
-  ```
-  
-  <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-aliases-verbose.png" width="500" />
-  
-  It makes `mv`, `rm`, and `cp` to be verbosed by default. It alse set `interactive` mode to `rm`.
-
-- **Better `mkdir`**
-  
-  ```
-  alias mkdir="mkdir -p"
-  alias md="mkdir"
-  ```
-  
-  `mkdir` always create parent directories if it didn't exist
-
-- **Colorful `ls`**
-
-  ```
-  alias ls='ls -GFh'
-  alias ll='ls -GFhl'
-  ```
-  
-  <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-aliases-ls.png" width="500" />
-  
-  `ll` is just long format of `ls`
-
-- **Easy edit**
-
-  ```
-  alias ehosts="sudo $EDITOR /etc/hosts"
-  alias edotfiles="$EDITOR $DOTFILES_DIR"
-  alias ezplug="$EDITOR $DOTFILES_DIR/zsh/plugins.zsh"
-  alias ealias="$EDITOR $DOTFILES_DIR/zsh/aliases.zsh"
-  alias espalias="$EDITOR $DOTFILES_DIR/specific/zsh/aliases.zsh"
-  alias espexports="$EDITOR $DOTFILES_DIR/specific/zsh/exports.zsh"
-  ```
-
-- **Git**
-
-  ```
-  alias gst="git status -s"
-  alias gd="git diff --color-words"
-  alias ga="git add -A"
-  ...
-  
-  ```
-  
-  Common git commands
-  
+- It has its own [documentation page](https://github.com/andriepu/dotfiles/blob/master/readme/zsh-aliases.md).
 
 
 #### `plugins.zsh`
 
-`plugins.zsh` is special. It has its own [documentation page](https://github.com/andriepu/dotfiles/blob/master/readme/zsh-plugins.md).
+- It has its own [documentation page](https://github.com/andriepu/dotfiles/blob/master/readme/zsh-plugins.md).
 
 #### `nyan.zsh`
 
-print **legendary nyan cat** to greet you every time you open terminal.
+- print legendary **nyan cat** to greet you every time you open **terminal**.
