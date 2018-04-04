@@ -106,4 +106,4 @@ Here is the plugins that I used to optimize zsh. What I wrote down here are the 
   --- |
   <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-theme-dayspring.png" width="500" /> |
 
----
+
