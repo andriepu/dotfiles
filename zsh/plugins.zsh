@@ -8,8 +8,6 @@ zplug "djui/alias-tips"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "Tarrasch/zsh-bd"
 zplug "ael-code/zsh-colored-man-pages"
-zplug "lib/clipboard", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
 #
 # }}}
@@ -62,6 +60,7 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
 # Plugins - zsh-autosuggestions {{{
 #
 bindkey '^P' autosuggest-accept
+bindkey '^T' autosuggest-toggle
 #
 # }}}
 
