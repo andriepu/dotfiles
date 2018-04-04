@@ -69,4 +69,39 @@ Here is the plugins that I used to optimize zsh. What I wrote down here are the 
 
 - **`zplug "Tarrasch/zsh-bd"`**
 
+  _"Quickly go back to a specific parent directory instead of typing `cd ../../..` redundantly"_
   
+  &nbsp; |
+  --- |
+  <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-zsh-bd.gif" width="500" /> |
+
+- **`zplug "ael-code/zsh-colored-man-pages"`**
+  
+  Before | After
+  --- | ---
+  <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-zsh-colored-man-pages-off.png" width="500" /> | <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-zsh-colored-man-pages-on.png" width="500" />
+  
+- **`zplug "lib/completion", from:oh-my-zsh`**
+   
+  It loads `completion.zsh` library from `oh-my-zsh`, enabling navigation inside suggestions.
+  
+  Before | After
+  --- | ---
+  <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-completion-off.gif" width="500" /> | <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-completion-on.gif" width="500" />
+  
+  ```
+  # Use vim-like navigation key to cycling through suggestions
+ 
+  bindkey -M menuselect 'h' vi-backward-char
+  bindkey -M menuselect 'k' vi-up-line-or-history
+  bindkey -M menuselect 'l' vi-forward-char
+  bindkey -M menuselect 'j' vi-down-line-or-history
+  ```
+
+- **`zplug "$DOTFILES_DIR/themes/zsh", use:"dayspring.zsh-theme", from:local, as:theme`**
+  
+  It loads theme from local directory
+  
+  &nbsp; |
+  --- |
+  <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-theme-dayspring.png" width="500" /> |
