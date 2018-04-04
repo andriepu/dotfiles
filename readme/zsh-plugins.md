@@ -67,7 +67,7 @@ Here is the plugins that I used to optimize zsh. What I wrote down here are the 
   HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
   ```
 
-- **`zplug "Tarrasch/zsh-bd"`**
+- **`zplug "Tarrasch/zsh-bd"`** [»](https://github.com/Tarrasch/zsh-bd)
 
   _"Quickly go back to a specific parent directory instead of typing `cd ../../..` redundantly"_
   
@@ -75,13 +75,13 @@ Here is the plugins that I used to optimize zsh. What I wrote down here are the 
   --- |
   <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-zsh-bd.gif" width="500" /> |
 
-- **`zplug "ael-code/zsh-colored-man-pages"`**
+- **`zplug "ael-code/zsh-colored-man-pages"`** [»](https://github.com/ael-code/zsh-colored-man-pages)
   
   Before | After
   --- | ---
   <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-zsh-colored-man-pages-off.png" width="500" /> | <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-zsh-colored-man-pages-on.png" width="500" />
   
-- **`zplug "lib/completion", from:oh-my-zsh`**
+- **`zplug "lib/completion", from:oh-my-zsh`** [»](https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/completion.zsh)
    
   It loads `completion.zsh` library from `oh-my-zsh`, enabling navigation inside suggestions.
   
@@ -98,10 +98,12 @@ Here is the plugins that I used to optimize zsh. What I wrote down here are the 
   bindkey -M menuselect 'j' vi-down-line-or-history
   ```
 
-- **`zplug "$DOTFILES_DIR/themes/zsh", use:"dayspring.zsh-theme", from:local, as:theme`**
+- **`zplug "$DOTFILES_DIR/themes/zsh", use:"dayspring.zsh-theme", from:local, as:theme`**  [»]( https://github.com/andriepu/dotfiles/blob/master/themes/zsh/dayspring.zsh-theme)
   
   It loads theme from local directory
   
   &nbsp; |
   --- |
   <img src="https://raw.githubusercontent.com/andriepu/screenshots/master/dotfiles/zsh-plugins-theme-dayspring.png" width="500" /> |
+
+---
