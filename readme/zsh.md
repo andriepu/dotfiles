@@ -174,10 +174,26 @@ This file means to contain aliases that help us to shorten syntax. It requires e
 
   ```
   alias ehosts="sudo $EDITOR /etc/hosts"
+  alias edotfiles="$EDITOR $DOTFILES_DIR"
   alias ezplug="$EDITOR $DOTFILES_DIR/zsh/plugins.zsh"
   alias ealias="$EDITOR $DOTFILES_DIR/zsh/aliases.zsh"
   alias espalias="$EDITOR $DOTFILES_DIR/specific/zsh/aliases.zsh"
+  alias espexports="$EDITOR $DOTFILES_DIR/specific/zsh/exports.zsh"
   ```
+
+- **Git**
+
+  ```
+  alias gst="git status -s"
+  alias gd="git diff --color-words"
+  alias ga="git add -A"
+  ...
+  
+  ```
+  
+  Common git commands
+  
+
 
 #### `plugins.zsh`
 
