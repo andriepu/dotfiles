@@ -11,6 +11,7 @@ zplug "ael-code/zsh-colored-man-pages"
 zplug "johnhamelink/rvm-zsh"
 zplug "lib/clipboard", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
+zplug "lib/completion", from:oh-my-zsh
 #
 # }}}
 
@@ -62,6 +63,16 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
 # Plugins - zsh-autosuggestions {{{
 #
 bindkey '^P' autosuggest-accept
+#
+# }}}
+
+# Plugins - completion {{{
+#
+# use the vi navigation keys in menu completion
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 #
 # }}}
 
