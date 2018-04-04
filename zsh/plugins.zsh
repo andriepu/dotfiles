@@ -60,7 +60,6 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
 # Plugins - zsh-autosuggestions {{{
 #
 bindkey '^P' autosuggest-accept
-bindkey '^T' autosuggest-toggle
 #
 # }}}
 
