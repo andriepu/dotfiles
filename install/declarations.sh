@@ -33,7 +33,7 @@ then
   hput upgradePkg vim "brew upgrade vim --override-system-vi"
 else
   # Ubuntu or Else
-  hput installDep zsh "sudo apt-get install zplug"
+  hput installDep zsh "curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh"
   hput installDep tmux "gem install tmuxinator"
   hput installDep vim "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
