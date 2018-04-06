@@ -14,7 +14,6 @@ INSTALL_LIST=(
 
 DEP_LIST=(
   curl
-  haproxy
 )
 
 # Remove current temporary files
@@ -66,6 +65,6 @@ fi
 print_install_ext_names_li() {
   extensions=$(hget installExtNames $1)
   printf "${Green}${Bold}  - "
-  printf "${extensions/;/\n  - }"
+  printf "${extensions/;/\\n  - }"
   printf "\n\n${Color_Off}"
 }
