@@ -6,11 +6,11 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Imports {{{
 #
 # Order matters
-source ${DOTFILES_DIR}/install/colors.sh
-source ${DOTFILES_DIR}/install/hashmap.sh
+source ${DOTFILES_DIR}/setup/colors.sh
+source ${DOTFILES_DIR}/setup/hashmap.sh
 
-source ${DOTFILES_DIR}/install/declarations.sh
-source ${DOTFILES_DIR}/install/confirmations.sh
+source ${DOTFILES_DIR}/setup/declarations.sh
+source ${DOTFILES_DIR}/setup/confirmations.sh
 #
 # }}}
 
@@ -20,43 +20,71 @@ cd $DOTFILES_DIR
 
 # Install dependencies {{{
 #
-print_in_blue "\nChecking Installation"
+print_in_blue "\nChecking Dependencies"
 print_in_blue "\n--------------------------------"
 printf "\n"
-for to_install in ${INSTALL_LIST[@]}
+
+for to_install in ${DEP_LIST[@]}
 do
-  printf "~> Asking for $to_install"
+  printf "~> Checking for $to_install"
   printf "\n"
   ask_for_install $to_install
   if answer_is_yes;
   then
-    if command_exists "$1";
-    then
-      $(hget installPkg $to_install)
-    else
-      $(hget upgradePkg $to_install)
-    fi
+    $(hget installDep $to_install)
   fi
 
-  if command_exists $to_install && hget installDep $to_install > /dev/null;
-  then
-    ask_for_confirmation "Install $to_install extensions to make it Great Again"
-    if answer_is_yes;
-    then
-      $(hget installDep $to_install)
-    fi
-  fi
+  OUTDATED=""
 
-  printf "~> Finish asking for $to_install..."
-  printf "\n\n"
+  printf "\n"
 done
 #
 # }}}
 
+
+# Install applications {{{
+#
+print_in_blue "\nChecking Installation"
+print_in_blue "\n--------------------------------------"
+printf "\n"
+
+for to_install in ${INSTALL_LIST[@]}
+do
+  printf "~> Asking for $to_install"
+  printf "\n"
+  ask_for_install $to_install "check_update:true"
+  if answer_is_yes;
+  then
+    if [ -n $OUTDATED ];
+    then
+      $(hget upgradePkg $to_install)
+      OUTDATED=""
+    else
+      $(hget installPkg $to_install)
+    fi
+  fi
+
+  if command_exists $to_install && hget installExt $to_install > /dev/null;
+  then
+    printf "\n$to_install extensions:\n"
+    print_install_ext_names_li $to_install
+    ask_for_confirmation "Install extensions"
+    if answer_is_yes;
+    then
+      $(hget installExt $to_install)
+    fi
+  fi
+
+  printf "\n"
+done
+#
+# }}}
+
+
 # Creating symlinks to be placed in $HOME {{{
 #
 print_in_blue "\nCreating Symlinks"
-print_in_blue "\n--------------------------------"
+print_in_blue "\n--------------------------------------"
 printf "\n"
 for i in ${SYMLINK_LIST[@]}
 do
@@ -81,7 +109,7 @@ done
 if command_exists "zsh";
 then
   print_in_blue "\nZsh Setup"
-  print_in_blue "\n--------------------------------"
+  print_in_blue "\n--------------------------------------"
   printf "\n"
   ask_for_confirmation "Do you want to make zsh as your default SHELL"
   if answer_is_yes;
@@ -101,7 +129,7 @@ fi
 if command_exists "tmux" && [[ -f $HOME/.tmux.conf ]];
 then
   print_in_blue "\nTmux Setup"
-  print_in_blue "\n--------------------------------"
+  print_in_blue "\n--------------------------------------"
   printf "\n"
   tmux source-file $HOME/.tmux.conf
 fi
@@ -113,7 +141,7 @@ fi
 if command_exists "vim" && [[ -f $HOME/.vim/autoload/plug.vim ]];
 then
   print_in_blue "\nVim Setup"
-  print_in_blue "\n--------------------------------"
+  print_in_blue "\n--------------------------------------"
   printf "\n"
   ask_for_confirmation "Install Vim plugins"
   if answer_is_yes;
@@ -128,7 +156,7 @@ fi
 if command_exists "zsh";
 then
   print_in_blue "\nAll Hail ZSH"
-  print_in_blue "\n--------------------------------"
+  print_in_blue "\n--------------------------------------"
   printf "\n"
   ask_for_confirmation "Run Zsh"
   if answer_is_yes;

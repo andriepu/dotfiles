@@ -57,6 +57,7 @@ alias gd="git diff --color-words"
 alias ga="git add -A"
 alias gcmsg="git commit -m"
 alias gacmsg="ga; gcmsg"
+alias gco="git checkout"
 alias gcoa="git checkout ."
 alias gcm="git checkout master"
 alias ggpush='git push origin $(git_current_branch)'

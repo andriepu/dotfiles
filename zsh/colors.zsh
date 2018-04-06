@@ -2,7 +2,7 @@
 Color_Off='\033[0m'       # Text Reset
 
 # Bold
-Bold='\033[1m'       # Bold
+Bold='\033[1m'            # Bold
 
 # Regular Colors
 Black='\033[0;30m'        # Black
