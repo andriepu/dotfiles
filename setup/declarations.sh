@@ -14,6 +14,7 @@ INSTALL_LIST=(
 
 DEP_LIST=(
   curl
+  gem
 )
 
 # Remove current temporary files
@@ -31,9 +32,10 @@ if [[ $OSTYPE =~ darwin* ]];
 then
   # OSX
   hput installDep curl "brew install curl"
+  hput installDep gem "brew install ruby"
 
   hput installExt zsh "brew install zplug"
-  hput installExt tmux "gem install tmuxinator"
+  hput installExt tmux "sudo gem install tmuxinator"
   hput installExt vim "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
   hput installPkg zsh "brew install zsh"
@@ -47,9 +49,10 @@ elif [[ $OSTYPE =~ linux* ]];
 then
   # LINUX
   hput installDep curl "sudo apt-get install curl"
+  hput installDep gem "sudo apt-get install ruby"
 
-  hput installExt zsh "curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh"
-  hput installExt tmux "gem install tmuxinator"
+  hput installExt zsh "rm -rfd $HOME/.zplug && curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh"
+  hput installExt tmux "sudo gem install tmuxinator"
   hput installExt vim "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
   hput installPkg zsh "sudo apt-get install zsh"

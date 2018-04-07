@@ -10,7 +10,13 @@ export KEYTIMEOUT=10
 
 # Zplug {{{
 #
-export ZPLUG_HOME=/usr/local/opt/zplug
+if [[ $OSTYPE =~ darwin* ]];
+then
+  export ZPLUG_HOME=/usr/local/opt/zplug
+else
+  export ZPLUG_HOME=$HOME/.zplug
+fi
+
 source $ZPLUG_HOME/init.zsh
 #
 # }}}

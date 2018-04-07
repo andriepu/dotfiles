@@ -41,7 +41,6 @@ done
 #
 # }}}
 
-
 # Install applications {{{
 #
 print_in_blue "\nChecking Installation"
@@ -55,14 +54,16 @@ do
   ask_for_install $to_install "check_update:true"
   if answer_is_yes;
   then
-    if [ -n $OUTDATED ];
+    if [ -n "$OUTDATED" ];
     then
+      echo $OUTDATED
       $(hget upgradePkg $to_install)
-      OUTDATED=""
     else
       $(hget installPkg $to_install)
     fi
   fi
+
+  OUTDATED=""
 
   if command_exists $to_install && hget installExt $to_install > /dev/null;
   then
@@ -71,7 +72,7 @@ do
     ask_for_confirmation "Install extensions"
     if answer_is_yes;
     then
-      $(hget installExt $to_install)
+      eval "$(hget installExt $to_install)"
     fi
   fi
 
@@ -79,7 +80,6 @@ do
 done
 #
 # }}}
-
 
 # Creating symlinks to be placed in $HOME {{{
 #
