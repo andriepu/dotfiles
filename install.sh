@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo -v
+
 # DOTFILES_DIR contains the path of this file
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -18,62 +20,139 @@ source ${DOTFILES_DIR}/setup/confirmations.sh
 # Next processes must be run from the root of dotfiles directory
 cd $DOTFILES_DIR
 
-# Install dependencies {{{
+# Installing Dependencies {{{
 #
-print_in_blue "\nChecking Dependencies"
-print_in_blue "\n--------------------------------"
+print_in_blue "\nDependencies"
+print_in_blue "\n--------------------------------------"
 printf "\n"
-
-for to_install in ${DEP_LIST[@]}
-do
-  printf "~> Checking for $to_install"
-  printf "\n"
-  ask_for_install $to_install
-  if answer_is_yes;
-  then
-    $(hget installDep $to_install)
-  fi
-
-  OUTDATED=""
-
-  printf "\n"
-done
+print_app_in_li "$DEP_LIST" "coredep"
+should_prompt=$(hget promptInstall "coredep")
+if [ $should_prompt -gt 0 ];
+then
+  waiting_for_response
+  for dep in "${ARRAY[@]}"
+  do
+    eval $(hget installPkg $dep)
+  done
+fi
 #
 # }}}
 
-# Install applications {{{
+# Installing Applications {{{
 #
-print_in_blue "\nChecking Installation"
+print_in_blue "\nInstalling Applications"
 print_in_blue "\n--------------------------------------"
-printf "\n"
+printf "\n\n"
 
 for to_install in ${INSTALL_LIST[@]}
 do
-  printf "~> Asking for $to_install"
+  get_local_app
+  hclear promptInstall
+
+  print_in_purple "${Bold}-- $to_install --"
+  print_in_purple "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   printf "\n"
+
+  print_in_yellow "» Status:"
+  if app_is_exists $to_install;
+  then
+    print_in_green "Installed"
+  else
+    print_in_red "Not Installed"
+  fi
+
+  printf "\n\n"
+
+  tmp=$(hget installDepNames $to_install)
+  if [[ $tmp ]];
+  then
+    print_in_yellow "» Deps:"
+    printf "\n"
+    print_app_in_li "$tmp" "dep"
+  fi
+
+  tmp=$(hget installExtNames $to_install)
+  if [[ $tmp ]];
+  then
+    print_in_yellow "» Extras:"
+    printf "\n"
+    print_app_in_li "$tmp" "ext"
+  fi
+
   ask_for_install $to_install "check_update:true"
   if answer_is_yes;
   then
-    if [ -n "$OUTDATED" ];
+    if [[ $OUTDATED ]];
     then
-      echo $OUTDATED
-      $(hget upgradePkg $to_install)
+      eval "$(hget upgradePkg $to_install)"
     else
-      $(hget installPkg $to_install)
+      eval "$(hget installPkg $to_install)"
     fi
   fi
 
-  OUTDATED=""
-
-  if command_exists $to_install && hget installExt $to_install > /dev/null;
+  tmp=$(hget installDepNames $to_install)
+  should_prompt=$(hget promptInstall "dep")
+  if [ $tmp ] && [ $should_prompt -gt 0 ];
   then
-    printf "\n$to_install extensions:\n"
-    print_install_ext_names_li $to_install
-    ask_for_confirmation "Install extensions"
+    ask_for_confirmation "Install Dependencies"
     if answer_is_yes;
     then
-      eval "$(hget installExt $to_install)"
+      string_to_array "$tmp"
+      for pkg in "${ARRAY[@]}"
+      do
+        if app_is_exists $pkg;
+        then
+          check_outdated $pkg
+          if answer_is_yes;
+          then
+            if [[ $OUTDATED ]];
+            then
+              eval "$(hget upgradePkg $pkg)"
+            fi
+          fi
+        else
+          eval "$(hget installPkg $pkg)"
+        fi
+      done
+    else
+      echo
     fi
+  fi
+
+  tmp=$(hget installExtNames $to_install)
+  should_prompt=$(hget promptInstall "ext")
+  if [ -n "$tmp" ] && [[ ! $should_prompt == 0 ]];
+  then
+    ask_for_confirmation "Install Extras"
+    if answer_is_yes;
+    then
+      string_to_array "$tmp"
+      for extra in "${ARRAY[@]}"
+      do
+        if app_is_exists $extra;
+        then
+          check_outdated $extra
+          if answer_is_yes;
+          then
+            if [[ $OUTDATED ]];
+            then
+              eval "$(hget upgradePkg $extra)"
+            fi
+          fi
+        else
+          eval "$(hget installPkg $extra)"
+        fi
+      done
+      echo
+    else
+      echo
+    fi
+  fi
+
+  tmp=$(hget setupPkg $to_install)
+  if [[ $tmp ]];
+  then
+    eval "$tmp"
   fi
 
   printf "\n"
@@ -81,89 +160,12 @@ done
 #
 # }}}
 
-# Creating symlinks to be placed in $HOME {{{
-#
-print_in_blue "\nCreating Symlinks"
-print_in_blue "\n--------------------------------------"
-printf "\n"
-for i in ${SYMLINK_LIST[@]}
-do
-  ask_for_confirmation "Create symlink to '$HOME/$i' and backup your current $i if existed"
-  if answer_is_yes;
-  then
-    if [[ -f $HOME/$i && ! -L $HOME/$i ]]
-    then
-      printf "backing up your $i"
-      mv $HOME/$i $DOTFILES_DIR/backups/$i.backup
-    fi
+print_in_green "All is done. Please reopen terminal to take effects..."
+echo
+echo
 
-    printf "creating symlink"
-    ln -svf $DOTFILES_DIR/$i $HOME/$i
-  fi
-done
-#
-# }}}
-
-# Zsh Setup {{{
-#
-if command_exists "zsh";
-then
-  print_in_blue "\nZsh Setup"
-  print_in_blue "\n--------------------------------------"
-  printf "\n"
-  ask_for_confirmation "Do you want to make zsh as your default SHELL"
-  if answer_is_yes;
-  then
-    if ! grep -Fxq "$(which zsh)" /etc/shells;
-    then
-      sudo sh -c "echo $(which zsh) >> /etc/shells"
-    fi
-    chsh -s $(which zsh)
-  fi
-fi
-#
-# }}}
-
-# Tmux Setup {{{
-#
-if command_exists "tmux" && [[ -f $HOME/.tmux.conf ]];
-then
-  print_in_blue "\nTmux Setup"
-  print_in_blue "\n--------------------------------------"
-  printf "\n"
-  tmux source-file $HOME/.tmux.conf
-fi
-#
-# }}}
-
-# Vim Setup {{{
-#
-if command_exists "vim" && [[ -f $HOME/.vim/autoload/plug.vim ]];
-then
-  print_in_blue "\nVim Setup"
-  print_in_blue "\n--------------------------------------"
-  printf "\n"
-  ask_for_confirmation "Install Vim plugins"
-  if answer_is_yes;
-  then
-    printf "\n"
-    vim +'PlugInstall --sync' +qa
-  fi
-fi
-#
-# }}}
-
-if command_exists "zsh";
-then
-  print_in_blue "\nAll Hail ZSH"
-  print_in_blue "\n--------------------------------------"
-  printf "\n"
-  ask_for_confirmation "Run Zsh"
-  if answer_is_yes;
-  then
-    zsh
-  fi
-fi
+waiting_for_response
+echo
 
 hclear_all
 

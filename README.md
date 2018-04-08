@@ -47,7 +47,7 @@ I'll try to make it well documented, so if you want to follow what the old man s
 6. Run script and follow the instructions.
 
    `
-   . ./install.sh
+   bash ./install.sh
    `
 
 7. Adjust some settings to match your local environment by [reading it](https://github.com/andriepu/dotfiles/blob/master/README.md#what-is-in-it)

@@ -187,6 +187,12 @@ map <C-l> <C-W>l
 "
 " }}}
 
+" Filetype specifix {{{
+"
+autocmd BufNewFile,BufRead *.sh   set filetype=zsh
+"
+" }}}
+
 " Plugin - vim-easyclip {{{
 "
 nmap M <Plug>MoveMotionEndOfLinePlug
