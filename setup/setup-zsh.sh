@@ -18,16 +18,20 @@ waiting_for_response
 echo
 
 # Set zsh as your default SHELL
-if [[ $SHELL =~ *zsh* ]];
+if [[ ! $SHELL =~ zsh* ]];
 then
+  if [[ $OSTYPE =~ linux* ]];
+  then
+    echo -e "${Yellow}Setting zsh as yout default SHELL${Color_Off}"
+  fi
+
   if ! grep -Fxq "$(which zsh)" /etc/shells;
   then
     sudo sh -c "echo $(which zsh) >> /etc/shells"
   fi
   chsh -s $(which zsh)
+  echo
 fi
-
-echo
 
 # Creating symlink and back up your existing ~/.zshrc
 creating_symlink "$file"

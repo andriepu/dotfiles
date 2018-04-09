@@ -123,6 +123,7 @@ do
   should_prompt=$(hget promptInstall "ext")
   if [ -n "$tmp" ] && [[ ! $should_prompt == 0 ]];
   then
+    echo
     ask_for_confirmation "Install Extras"
     if answer_is_yes;
     then
@@ -160,12 +161,18 @@ done
 #
 # }}}
 
-print_in_green "All is done. Please reopen terminal to take effects..."
+if [[ $OSTYPE =~ darwin* ]];
+then
+  print_in_green "All is done. Please REOPEN terminal to take effects..."
+elif [[ $OSTYPE =~ linux* ]];
+then
+  print_in_green "All is done. Please RELOGIN to take effects..."
+fi
+
 echo
 echo
 
 waiting_for_response
-echo
 
 hclear_all
 

@@ -47,6 +47,7 @@ ask_for_confirmation() {
 
 waiting_for_response() {
   read -rsn1 -p"» Press any key to continue..."; echo
+  echo
 }
 
 answer_is_yes() {

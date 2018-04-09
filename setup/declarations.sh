@@ -1,5 +1,3 @@
-DEP_LIST="rubygems•homebrew"
-
 # List of files to be installed
 INSTALL_LIST=(
   zsh
@@ -24,8 +22,6 @@ hput installExtNames zsh "zplug"
 hput installExtNames tmux "tmuxinator"
 hput installExtNames vim "the-silver-searcher•vim-plug"
 
-hput installDepNames vim "curl"
-
 if [[ $OSTYPE =~ darwin* ]];
 then
   # OSX
@@ -36,12 +32,15 @@ then
     GEM_OUTDATED="$(gem outdated)"
   }
 
+  DEP_LIST="rubygems•homebrew"
+
+  hput installDepNames vim "curl"
+
   # ---
   hput checkOutdated zsh 'echo "$BREW_OUTDATED" | grep zsh'
   hput checkOutdated tmux 'echo "$BREW_OUTDATED" | grep tmux'
   hput checkOutdated vim 'echo "$BREW_OUTDATED" | grep vim'
   hput checkOutdated zplug 'echo "$BREW_OUTDATED" | grep zplug'
-  hput checkOutdated haproxy 'echo "$BREW_OUTDATED" | grep haproxy'
   hput checkOutdated tmuxinator 'echo "$GEM_OUTDATED" | grep tmuxinator'
   # ---
   hput checkExist homebrew "which brew"
@@ -60,7 +59,7 @@ then
   # ---
   hput upgradePkg zsh "brew upgrade zsh"
   hput upgradePkg tmux "brew upgrade tmux"
-  hput upgradePkg vim "brew upgrade vim --override-system-vi"
+  hput upgradePkg vim "brew upgrade vim --with-override-system-vi"
   hput upgradePkg zplug "brew upgrade zplug"
   hput upgradePkg tmuxinator "gem install tmuxinator"
   # ---
@@ -81,26 +80,56 @@ then
 
 elif [[ $OSTYPE =~ linux* ]];
 then
-  echo "Not yet"
-  exit 0;
-  # # LINUX
-  # hput installDep curl "sudo apt-get install curl"
-  # hput installDep gem "sudo apt-get install ruby"
+  # LINUX
+  get_local_app() {
+    PKG_OUTDATED=$(apt-get --just-print upgrade 2>&1 | perl -ne 'if (/Inst\s([\w,\-,\d,\.,~,:,\+]+)\s\[([\w,\-,\d,\.,~,:,\+]+)\]\s\(([\w,\-,\d,\.,~,:,\+]+)\)? /i) {print "$1 ($2) < $3\\n"}')
+    GEM_LIST="$(gem list)"
+    # GEM_OUTDATED="$(gem outdated)"
+    GEM_OUTDATED=""
+  }
 
-  # hput installExt zsh "rm -rfd $HOME/.zplug && curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh"
-  # hput installExt tmux "sudo gem install tmuxinator"
-  # hput installExt vim "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  DEP_LIST="rubygems"
 
-  # hput installPkg zsh "sudo apt-get install zsh"
-  # hput installPkg tmux "sudo apt-get install tmux"
-  # hput installPkg vim "sudo apt-get install vim"
+  hput installDepNames zsh "curl"
+  hput installDepNames vim "curl"
 
-  # hput upgradePkg zsh "sudo apt-get install --only-upgrade zsh"
-  # hput upgradePkg tmux "sudo apt-get install --only-upgrade tmux"
-  # hput upgradePkg vim "sudo apt-get install --only-upgrade vim"
-else
-  echo "Sorry, your Operating System seems to be not supported."
-  exit 0;
+  # ---
+  hput checkOutdated zsh 'echo "$PKG_OUTDATED" | grep "^zsh "'
+  hput checkOutdated tmux 'echo "$PKG_OUTDATED" | grep "^tmux "'
+  hput checkOutdated vim 'echo "$PKG_OUTDATED" | grep "^vim "'
+  hput checkOutdated tmuxinator 'echo "$GEM_OUTDATED" | grep tmuxinator'
+  # ---
+  hput checkExist rubygems "which gem"
+
+  hput checkExist zsh 'which zsh'
+  hput checkExist tmux 'which tmux'
+  hput checkExist vim 'which vim'
+
+  hput checkExist zplug '[ -d "$HOME/.zplug" ] && echo "ok"'
+  hput checkExist tmuxinator 'echo "$GEM_LIST" | grep tmuxinator'
+
+  hput checkExist curl "which curl"
+  hput checkExist the-silver-searcher 'which ag'
+  hput checkExist vim-plug '[ -d "$HOME/.vim/autoload" ] && echo "ok"'
+  # ---
+  hput upgradePkg zsh "sudo apt-get install -y --only-upgrade zsh"
+  hput upgradePkg tmux "sudo apt-get install -y --only-upgrade tmux"
+  hput upgradePkg vim "sudo apt-get install -y --only-upgrade vim"
+  hput upgradePkg tmuxinator "sudo gem install tmuxinator"
+  # ---
+  hput installPkg rubygems "sudo apt-get install -y ruby"
+
+  hput installPkg zsh "sudo apt-get install -y zsh"
+  hput installPkg tmux "source $DOTFILES_DIR/setup/install-tmux.sh"
+  hput installPkg vim "sudo apt-get install -y vim"
+
+  hput installPkg curl "sudo apt-get install -y curl"
+
+  hput installPkg zplug "curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh"
+  hput installPkg tmuxinator "sudo gem install tmuxinator"
+
+  hput installPkg vim-plug "curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  hput installPkg the-silver-searcher "sudo apt-get install silversearcher-ag"
 fi
 
 string_to_array() {
