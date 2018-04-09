@@ -14,7 +14,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'rking/ag.vim'
 Plug 'vim-airline/vim-airline'
@@ -199,10 +199,8 @@ nmap M <Plug>MoveMotionEndOfLinePlug
 "
 " }}}
 
-" Plugin - gundo {{{
-nnoremap <leader>u :GundoToggle<CR>
-
-let g:gundo_preview_bottom=1
+" Plugin - undotree {{{
+nnoremap <leader>u :UndotreeToggle<CR>
 " }}}
 
 " Plugin - ag {{{
