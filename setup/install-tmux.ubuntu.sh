@@ -7,6 +7,7 @@ sudo apt install -y build-essential
 sudo apt install -y pkg-config
 sudo apt install -y libevent-dev
 sudo apt install -y libncurses5-dev
+sudo apt install -y xclip
 
 rm -fr /tmp/tmux
 

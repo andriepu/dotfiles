@@ -120,7 +120,7 @@ then
   hput installPkg rubygems "sudo apt-get install -y ruby"
 
   hput installPkg zsh "sudo apt-get install -y zsh"
-  hput installPkg tmux "source $DOTFILES_DIR/setup/install-tmux.sh"
+  hput installPkg tmux "source $DOTFILES_DIR/setup/install-tmux.ubuntu.sh"
   hput installPkg vim "sudo apt-get install -y vim"
 
   hput installPkg curl "sudo apt-get install -y curl"
