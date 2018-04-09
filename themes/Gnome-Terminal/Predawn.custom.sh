@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-[[ -z "$PROFILE_NAME" ]] && PROFILE_NAME="Dayspring"
-[[ -z "$PROFILE_SLUG" ]] && PROFILE_SLUG="day-spring"
+[[ -z "$PROFILE_NAME" ]] && PROFILE_NAME="Predawn"
+[[ -z "$PROFILE_SLUG" ]] && PROFILE_SLUG="predawn"
 [[ -z "$DCONF" ]] && DCONF=dconf
 [[ -z "$UUIDGEN" ]] && UUIDGEN=uuidgen
 
@@ -65,7 +65,8 @@ if which "$DCONF" > /dev/null 2>&1; then
         dset use-theme-colors "false"
         dset use-theme-background "false"
         dset background-type "'transparent'"
-        dset background-darkness "0.95"
+        dset use-system-font "false"
+        dset font "'Ubuntu Mono 11'"
 
         unset PROFILE_NAME
         unset PROFILE_SLUG
@@ -116,6 +117,9 @@ gset string bold_color "#96a0a0"
 gset bool   bold_color_same_as_fg "true"
 gset bool   use_theme_colors "false"
 gset bool   use_theme_background "false"
+gset string background_type "'transparent'"
+gset bool use-system-font "false"
+gset string font "'Ubuntu Mono 11'"
 
 unset PROFILE_NAME
 unset PROFILE_SLUG
