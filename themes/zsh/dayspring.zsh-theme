@@ -14,7 +14,7 @@ zsh_theme_git_status() {
   fi
 }
 
-zsh_theme_user="%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}"
+zsh_theme_user="%{$terminfo[bold]$fg[green]%}%n%{$reset_color%}"
 
 if [[ $USER = 'root' ]]; then
   zsh_theme_user_symbol="%{$fg[red]%}#"

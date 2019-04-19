@@ -62,8 +62,9 @@ alias gcoa="git checkout ."
 alias gcm="git checkout master"
 alias ggpush='git push origin $(git_current_branch)'
 alias ggpull='git pull origin $(git_current_branch)'
+alias gl='git pull'
 alias gpfm="git pull origin master"
-alias gl='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit --max-count=15'
+alias glog='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit --max-count=15'
 alias gsta="git stash save"
 alias gstp="git stash pop"
 alias gsts="git stash show --text"

@@ -1,15 +1,16 @@
 # RVM {{{
 #
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 #
 # }}}
 
 # Go {{{
 #
 GOROOT=/usr/local/bin
-GOPATH=$HOME/Go
+GOPATH=$HOME/go
 
 export PATH=$GOPATH/bin:$PATH
 #
@@ -17,8 +18,33 @@ export PATH=$GOPATH/bin:$PATH
 
 # Erlang/Elixir {{{
 #
-export PATH=/usr/local/opt/erlang\@19/bin:$PATH
-export PATH=/Users/andriepu/Library/Elixir/elixir/bin:$PATH
+. ~/kerl/20.3/activate
+#
+# }}}
+
+# Elasticsearch {{{
+#
+export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+#
+# }}}
+
+# MySQL {{{
+#
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/mysql@5.6/lib"
+export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
+#
+# }}}
+
+# Kiex {{{
+#
+[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+#
+# }}}
+
+# Node Modules {{{
+#
+export PATH=./node_modules/.bin:$PATH
 #
 # }}}
 

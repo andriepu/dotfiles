@@ -1,5 +1,6 @@
 set nocompatible
-scriptencoding utf-8
+set encoding=utf-8
+set fileencoding=utf-8
 
 " Plugin Management - vim-plug {{{
 " Require - https://github.com/junegunn/vim-plug
@@ -30,7 +31,8 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-abolish'
 Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'iamcco/markdown-preview.vim'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call plug#end()
 "
@@ -105,6 +107,14 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 " move between autocomplete
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+
+" moving aroung in command mode
+cnoremap <C-h> <left>
+cnoremap <C-j> <down>
+cnoremap <C-k> <up>
+cnoremap <C-l> <right>
+cnoremap ^     <home>
+cnoremap $     <end>
 "
 " }}}
 
@@ -244,15 +254,18 @@ let g:Lf_DefaultMode='FullPath'
 ""
 " vim-json
 let g:vim_json_syntax_conceal = 1
+
+"vim-markdown
+let g:vim_markdown_conceal = 0
 "
 " }}}
 
-" Plugin - markdown-preview {{{
+" vim-markdown-preview {{{
 "
-nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
-imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
-nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
-imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_toggle=0
 "
 " }}}
 
