@@ -1,0 +1,32 @@
+
+# /Users/moebarox/Playground/dotfiles/specific/tmuxinator_projects/bumblebee.yml
+name: bumblebee
+root: ~/
+
+windows:
+    - playground:
+        layout: even-horizontal
+        panes:
+            - Autobot:
+                - set_pane_title Autobot
+                - to-bl
+                - cd autobot
+    - services:
+        layout: tiled
+        panes:
+            - Floo:
+                - set_pane_title Floo
+                - floo start
+            - Grandfleet:
+                - set_pane_title Grandfleet
+                - bl_grandfleet
+            - Autobot:
+                - set_pane_title Autobot
+                - to-bl
+                - cd autobot
+                - yarn dev
+            - Autobot_Monitor:
+                - set_pane_title Autobot Monitor
+                - to-bl
+                - cd autobot
+                - pm2 monit entry

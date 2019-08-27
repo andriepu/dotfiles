@@ -1,5 +1,5 @@
-# /Users/moebarox/Playground/dotfiles/specific/tmuxinator_projects/chat.yml
-name: chat
+# /Users/moebarox/Playground/dotfiles/specific/tmuxinator_projects/bukalapak.yml
+name: bukalapak
 root: ~/
 
 # Project hooks
@@ -26,7 +26,7 @@ windows:
                 - set_pane_title Terminal
                 - to-bl
                 - cd mothership
-            - Rails_console:
+            - Rails-console:
                 - set_pane_title Rails Console
                 - bl_rails_c
     - services:
@@ -38,6 +38,18 @@ windows:
             - Floo:
                 - set_pane_title Floo
                 - floo start
+            - Aleppo:
+                - set_pane_title Aleppo
+                - bl_aleppo
+            - Seedorf:
+                - set_pane_title Seedorf
+                - bl_seedorf
+            - Palaver-hub:
+                - set_pane_title Palaver Hub
+                - bl_palaver_hub
+            - Palaver:
+                - set_pane_title Palaver
+                - bl_palaver
             - Hahen:
                 - set_pane_title Hahen
                 - bl_hahen

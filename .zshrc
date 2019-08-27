@@ -1,4 +1,4 @@
-DOTFILES_DIR=$HOME/Playground/Side-Project/dotfiles
+DOTFILES_DIR=$HOME/Playground/dotfiles
 
 source $DOTFILES_DIR/zsh/colors.zsh
 source $DOTFILES_DIR/zsh/exports.zsh
@@ -16,4 +16,4 @@ source $DOTFILES_DIR/specific/zsh/aliases.zsh
 # source $DOTFILES_DIR/zsh/nyan.zsh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"

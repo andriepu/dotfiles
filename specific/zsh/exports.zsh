@@ -18,7 +18,7 @@ export PATH=$GOPATH/bin:$PATH
 
 # Erlang/Elixir {{{
 #
-. ~/kerl/20.3/activate
+# . ~/kerl/20.3/activate
 #
 # }}}
 
@@ -30,15 +30,28 @@ export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
 
 # MySQL {{{
 #
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/mysql@5.6/lib"
-export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
 #
 # }}}
 
 # Kiex {{{
 #
-[[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+# [[ -s "$HOME/.kiex/scripts/kiex" ]] && source "$HOME/.kiex/scripts/kiex"
+#
+# }}}
+
+# Asdf {{{
+#
+. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+#
+# }}}
+
+# Visual Studio Code {{{
+#
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 #
 # }}}
 
@@ -47,5 +60,7 @@ export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
 export PATH=./node_modules/.bin:$PATH
 #
 # }}}
+
+export FLOO_ROOT="$(npm root -g)/@andriepu/floo"
 
 # vim:set syn=sh foldmethod=marker foldlevel=0:
