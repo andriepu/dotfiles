@@ -62,12 +62,6 @@ export FLOO_ROOT="$(npm root -g)/@andriepu/floo"
 #
 # }}}
 
-# Lithoshpere {{{
-#
-export BL_NPM_REGISTRY_TOKEN="9gGeDLYf8cpxRXShyyDzXKatYvu3fOkPEY8t5GynrPVoEh4MPWwPeqMxHBRWHVWOW2H0cuzH/ZhMGoH3TnMxBA=="
-#
-# }}}
-
 # GPG {{{
 #
 export GPG_TTY=$(tty)
