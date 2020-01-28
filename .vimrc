@@ -8,6 +8,7 @@ set fileencoding=utf-8
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-surround'
+Plug 'ruanyl/coverage.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -215,7 +216,7 @@ nnoremap <leader>u :UndotreeToggle<CR>
 
 " Plugin - ag {{{
 "
-" start from root directoru
+" start from root directory
 let g:ag_working_path_mode="r"
 
 nnoremap <leader>a :Ag<Space>
@@ -247,6 +248,7 @@ let g:airline#extensions#ale#enabled = 1
 " Plugin - LeaderF {{{
 "
 let g:Lf_DefaultMode='FullPath'
+let g:Lf_UseVersionControlTool = 0
 "
 " }}}
 
@@ -265,7 +267,17 @@ let g:vim_markdown_conceal = 0
 let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
-let vim_markdown_preview_toggle=0
+let vim_markdown_preview_toggle=1
+"
+" }}}
+
+" coverage.vim {{{
+"
+let g:coverage_json_report_path = 'coverage/coverage-final.json'
+let g:coverage_sign_uncovered = '⦿'
+let g:coverage_interval = 5000
+let g:coverage_show_covered = 0
+let g:coverage_show_uncovered = 1
 "
 " }}}
 
