@@ -42,9 +42,35 @@ export CPPFLAGS="-I/usr/local/opt/mysql@5.6/include"
 #
 # }}}
 
+# NVM {{{
+#
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+#
+# }}}
+
 # Node Modules {{{
 #
 export PATH=./node_modules/.bin:$PATH
+#
+# }}}
+
+# Floo {{{
+#
+export FLOO_ROOT="$(npm root -g)/@andriepu/floo"
+#
+# }}}
+
+# GPG {{{
+#
+export GPG_TTY=$(tty)
+#
+# }}}
+
+# Brew {{{
+#
+export LC_ALL=en_US.UTF-8
 #
 # }}}
 
