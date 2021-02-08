@@ -226,10 +226,12 @@ let g:airline#extensions#ale#enabled = 1
 " Plugin - LeaderF {{{
 "
 let g:Lf_ShowDevIcons = 0
+let g:Lf_UseCache = 0
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
-let g:Lf_DefaultMode='NameOnly'
-let g:Lf_UseVersionControlTool = 0
+let g:Lf_DefaultMode='FullPath'
+let g:Lf_UseVersionControlTool = 1
+let g:Lf_GtagsAcceptDotfiles = 1
 "
 " }}}
 
