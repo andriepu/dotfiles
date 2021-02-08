@@ -1,6 +1,5 @@
 set nocompatible
 set encoding=utf-8
-set fileencoding=utf-8
 
 " Plugin Management - vim-plug {{{
 " Require - https://github.com/junegunn/vim-plug
@@ -10,29 +9,20 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'ruanyl/coverage.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'mbbill/undotree'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'rking/ag.vim'
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'mileszs/ack.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-vinegar'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'vim-scripts/loremipsum'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'tommcdo/vim-lion'
 Plug 'wellle/targets.vim'
-Plug 'tpope/vim-abolish'
-Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call plug#end()
@@ -108,14 +98,6 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 " move between autocomplete
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-
-" moving aroung in command mode
-cnoremap <C-h> <left>
-cnoremap <C-j> <down>
-cnoremap <C-k> <up>
-cnoremap <C-l> <right>
-cnoremap ^     <home>
-cnoremap $     <end>
 "
 " }}}
 
@@ -210,18 +192,14 @@ nmap M <Plug>MoveMotionEndOfLinePlug
 "
 " }}}
 
-" Plugin - undotree {{{
-nnoremap <leader>u :UndotreeToggle<CR>
-" }}}
-
-" Plugin - ag {{{
+"" Plugin - ag {{{
+""
+"" start from root directory
+"let g:ag_working_path_mode="r"
 "
-" start from root directory
-let g:ag_working_path_mode="r"
-
-nnoremap <leader>a :Ag<Space>
-"
-" }}}
+"nnoremap <leader>a :Ag<Space>
+""
+"" }}}
 
 " Plugin - ale {{{
 "
@@ -235,7 +213,7 @@ let g:ale_lint_on_save = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-"
+
 " }}}
 
 " Plugin - vim airline {{{
@@ -247,37 +225,38 @@ let g:airline#extensions#ale#enabled = 1
 
 " Plugin - LeaderF {{{
 "
-let g:Lf_DefaultMode='FullPath'
+let g:Lf_ShowDevIcons = 0
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_DefaultMode='NameOnly'
 let g:Lf_UseVersionControlTool = 0
 "
 " }}}
 
-" Plugin - polyglot {{{
-""
+" Plugin - vim-polyglot {{{
+"
 " vim-json
 let g:vim_json_syntax_conceal = 1
 
-"vim-markdown
+" vim-markdown
 let g:vim_markdown_conceal = 0
 "
 " }}}
 
-" vim-markdown-preview {{{
-"
-let vim_markdown_preview_github=1
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='Google Chrome'
-let vim_markdown_preview_toggle=1
-"
-" }}}
-
-" coverage.vim {{{
+" Plugin - coverage.vim {{{
 "
 let g:coverage_json_report_path = 'coverage/coverage-final.json'
 let g:coverage_sign_uncovered = '⦿'
 let g:coverage_interval = 5000
 let g:coverage_show_covered = 0
 let g:coverage_show_uncovered = 1
+"
+" }}}
+
+" Plugin - ack.vim {{{
+"
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 "
 " }}}
 
