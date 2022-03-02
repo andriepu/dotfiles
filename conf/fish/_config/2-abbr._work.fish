@@ -1,1 +1,1 @@
-abbr -a -g work "fish $HOME/.config/kitty/session/work.sh"
+abbr -a -g work "$HOME/.config/kitty/session/work.fish"
