@@ -1,3 +1,0 @@
-# Tmux Configurations
-
-Coming soon

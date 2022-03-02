@@ -1,0 +1,1 @@
+set -gx EXA_ICON_SPACING 2

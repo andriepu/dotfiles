@@ -1,3 +1,0 @@
-# Vim Configurations
-
-Coming soon
