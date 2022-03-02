@@ -90,7 +90,7 @@ function check_fish_setup
   check_app \
     --name='Symlink config' \
     --fn='test -e $HOME/.config/fish; and test (readlink -n $HOME/.config/fish) = $HOME/.dotfiles/conf/fish' \
-    --notes='ln -svf $HOME/.dotfiles/conf/fish/ $HOME/.config/fish'
+    --notes='ln -svf $HOME/.dotfiles/conf/fish $HOME/.config/fish'
 end
 
 # }}}
@@ -109,7 +109,7 @@ function check_kitty_setup
   check_app \
     --name='Symlink config' \
     --fn='test -e $HOME/.config/kitty; and test (readlink -n $HOME/.config/kitty) = $HOME/.dotfiles/conf/kitty' \
-    --notes='ln -svf $HOME/.dotfiles/conf/kitty/ $HOME/.config/kitty'
+    --notes='ln -svf $HOME/.dotfiles/conf/kitty $HOME/.config/kitty'
 end
 
 # }}}
@@ -128,7 +128,7 @@ function check_neovim_setup
   check_app \
     --name='Symlink config' \
     --fn='test -e $HOME/.config/nvim; and test (readlink -n $HOME/.config/nvim) = $HOME/.dotfiles/conf/nvim' \
-    --notes='ln -svf $HOME/.dotfiles/conf/nvim/ $HOME/.config/nvim'
+    --notes='ln -svf $HOME/.dotfiles/conf/nvim $HOME/.config/nvim'
 end
 
 # }}}
@@ -150,7 +150,7 @@ function check_fd
   check_app \
     --name='fd' \
     --fn='command -q fd' \
-    --deps='fd_setup'
+    --deps='fd_setup' \
     --notes='https://github.com/sharkdp/fd'
 end
 
@@ -158,7 +158,7 @@ function check_fd_setup
   check_app \
     --name='fd config' \
     --fn='test -e $HOME/.config/fd; and test (readlink -n $HOME/.config/fd) = $HOME/.dotfiles/conf/fd' \
-    --notes='ln -svf $HOME/.dotfiles/conf/fd/ $HOME/.config/fd'
+    --notes='ln -svf $HOME/.dotfiles/conf/fd $HOME/.config/fd'
 end
 
 # }}}
