@@ -107,26 +107,26 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use 'L3MON4D3/LuaSnip' -- snippet engine
+  use 'L3MON4D3/LuaSnip' -- Snippet engine
 
   -- GENERAL }}}
 
 
   -- THEME & VISUALS {{{
 
-  use {'EdenEast/nightfox.nvim', -- setup colorscheme {{{
+  use {'EdenEast/nightfox.nvim', -- Colorscheme {{{
     config = function() require('nightfox').load('nightfox') end
   } -- }}}
 
-  use 'kyazdani42/nvim-web-devicons' -- icons
+  use 'kyazdani42/nvim-web-devicons' -- Icons
 
-  use {'norcalli/nvim-colorizer.lua', -- show color code visually {{{
+  use {'norcalli/nvim-colorizer.lua', -- Show color code visually {{{
     config = function() require 'colorizer'.setup() end
   } -- }}}
 
-  use 'jeffkreeftmeijer/vim-numbertoggle' -- toggle between absolute and relative automatically
+  use 'jeffkreeftmeijer/vim-numbertoggle' -- Toggle between absolute and relative automatically
 
-  use {'p00f/nvim-ts-rainbow', -- rainbow parentheses {{{
+  use {'p00f/nvim-ts-rainbow', -- Rainbow parentheses {{{
     config = function ()
       require("nvim-treesitter.configs").setup {
         rainbow = {
@@ -136,11 +136,11 @@ return packer.startup(function(use)
     end
   } -- }}
 
-  use {'ojroques/nvim-hardline', -- status bar {{{
+  use {'ojroques/nvim-hardline', -- Status bar {{{
     config = function() require 'hardline'.setup{} end
   } -- }}}
 
-  use {'lukas-reineke/indent-blankline.nvim', -- show indentation {{{
+  use {'lukas-reineke/indent-blankline.nvim', -- Show indentation {{{
     config = function ()
       require('indent_blankline').setup {
         buftype_exclude = {'terminal', 'quickfix'},
@@ -149,7 +149,7 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use {'goolord/alpha-nvim', -- startup screen {{{
+  use {'goolord/alpha-nvim', -- Startup screen {{{
     config = function ()
       local dashboard = require('alpha.themes.dashboard')
 
@@ -194,7 +194,7 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use {'folke/twilight.nvim', -- autodim inactive code
+  use {'folke/twilight.nvim', -- Autodim inactive code
     config = function ()
       require('twilight').setup()
 
@@ -212,9 +212,9 @@ return packer.startup(function(use)
 
   -- FILES {{{
 
-  use 'tpope/vim-vinegar' -- file explorer
+  use 'tpope/vim-vinegar' -- File explorer
 
-  use {'nvim-telescope/telescope.nvim', -- fuzzy finder {{{
+  use {'nvim-telescope/telescope.nvim', -- Fuzzy finder {{{
     config = function ()
       require 'telescope'.setup {
         pickers = {
@@ -242,14 +242,13 @@ return packer.startup(function(use)
 
   -- EDITING {{{
 
-  use {'McAuleyPenney/tidy.nvim', -- remove trailing whitespaces {{{
+  use {'McAuleyPenney/tidy.nvim', -- Remove trailing whitespaces {{{
     event = 'BufWritePre'
   } -- }}}
 
-  use 'tpope/vim-commentary'
+  use 'tpope/vim-commentary' -- Easy commentary
 
-  -- Context Commentstring: setting commentstring option based on cursor location {{{
-  use {'JoosepAlviste/nvim-ts-context-commentstring',
+  use {'JoosepAlviste/nvim-ts-context-commentstring', -- Setting commentstring option based on cursor location {{{
     config = function ()
       require'nvim-treesitter.configs'.setup {
         context_commentstring = {
@@ -261,20 +260,17 @@ return packer.startup(function(use)
         },
       }
     end
-  }
-  -- }}}
+  } -- }}}
 
-  -- Surround: brackets editing (add/remove/replace) {{{
-  use 'tpope/vim-surround' -- Brackets editing
-  -- }}}
+  use 'tpope/vim-surround' -- Easy edit pairs
 
-   use {'windwp/nvim-autopairs',
-    config = function ()
-      require('nvim-autopairs').setup()
-    end
-   }
+   -- use {'windwp/nvim-autopairs', -- auto pairing {{{
+   --  config = function ()
+   --    require('nvim-autopairs').setup()
+   --  end
+   -- } -- }}}
 
-  -- use {'steelsojka/pears.nvim', -- auto bracket pairs
+  -- use {'steelsojka/pears.nvim', -- auto bracket pairs {{{
   --   config = function()
   --     local R = require 'pears.rule'
 
@@ -286,10 +282,9 @@ return packer.startup(function(use)
   --       })
   --     end)
   --   end
-  -- }
+  -- } -- }}}
 
-  -- Gomove: Shift text position (up/down/left/right) {{{
-  use {'booperlv/nvim-gomove',
+  use {'booperlv/nvim-gomove', -- Shift text position (up/down/left/right) {{{
     config = function ()
       require('gomove').setup({
         map_defaults = false
@@ -308,11 +303,9 @@ return packer.startup(function(use)
       map('x', '<S-k>', '<Plug>GoVSMUp', opts)
       map('x', '<S-l>', '<Plug>GoVSMRight', opts)
     end
-  }
-  -- }}}
+  } -- }}}
 
-  -- Cutlass: overrides the delete operations to actually just delete without affecting current yank. {{{
-  use {'svermeulen/vim-cutlass',
+  use {'svermeulen/vim-cutlass', -- Overrides the delete operations to actually just delete without affecting current yank {{{
     config = function()
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
@@ -323,11 +316,9 @@ return packer.startup(function(use)
       map('n', 'mm', 'dd', opts)
       map('n', 'M', 'D', opts)
     end
-  }
-  -- }}}
+  } -- }}}
 
-  -- Yoink: maintain yanks history {{{
-  use {'svermeulen/vim-yoink',
+  use {'svermeulen/vim-yoink', -- Maintain yanks history {{{
     config = function ()
       local map = vim.api.nvim_set_keymap
       local opts = { silent = true }
@@ -343,15 +334,14 @@ return packer.startup(function(use)
       map('n', 'gp', '<plug>(YoinkPaste_gp)', opts)
       map('n', 'gP', '<plug>(YoinkPaste_gP)', opts)
     end
-  }
-  -- }}}
+  } -- }}}
 
   -- EDITITNG }}}
 
 
   -- NAVIGATIONS {{{
 
-  use {'phaazon/hop.nvim', -- jump anywhere in a document with as few keystrokes as possible {{{
+  use {'phaazon/hop.nvim', -- Jump anywhere in a document with as few keystrokes as possible {{{
     config = function()
       require 'hop'.setup()
 
@@ -359,17 +349,17 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use {'folke/which-key.nvim', -- keymaps hints {{{
+  use {'folke/which-key.nvim', -- Keymaps hints {{{
     config = function ()
       require('which-key').setup()
     end
   } -- }}}
 
-  use {'karb94/neoscroll.nvim', -- smooth scroll {{{
+  use {'karb94/neoscroll.nvim', -- Smooth scroll {{{
     config = function() require('neoscroll').setup{} end
   } -- }}}
 
-  use {'edluffy/specs.nvim', -- highlight cursor position {{{
+  use {'edluffy/specs.nvim', -- Highlight cursor position {{{
     config = function()
       require('specs').setup{
         show_jumps = true,
@@ -390,7 +380,7 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use {'ethanholz/nvim-lastplace', -- reopen files at last edit position {{{
+  use {'ethanholz/nvim-lastplace', -- Reopen files at last edit position {{{
     config = function ()
       require'nvim-lastplace'.setup {
         lastplace_ignore_buftype = {'quickfix', 'nofile', 'help'},
@@ -405,7 +395,7 @@ return packer.startup(function(use)
 
   -- TABS & WINDOWS {{{
 
-  use {'akinsho/toggleterm.nvim', -- persist and toggle multiple terminals during an editing session {{{
+  use {'akinsho/toggleterm.nvim', -- Persist and toggle multiple terminals during an editing session {{{
     config = function()
       require 'toggleterm'.setup{
         open_mapping = [[<C-\>]],
@@ -434,15 +424,14 @@ return packer.startup(function(use)
       vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
       vim.cmd 'autocmd TermOpen * setlocal signcolumn=yes'
     end
-  }
-  -- }}}
+  } -- }}}
 
   -- TAB & WINDOWS }}}
 
 
   -- GIT {{{
 
-  use {'kdheepak/lazygit.nvim', -- open lazygit in neovim {{{
+  use {'kdheepak/lazygit.nvim', -- Open lazygit in neovim {{{
     config = function ()
       local map = vim.api.nvim_set_keymap
       local opts = { noremap = true, silent = true }
@@ -451,7 +440,7 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use {'lewis6991/gitsigns.nvim', -- show git sign in number column {{{
+  use {'lewis6991/gitsigns.nvim', -- Show git sign in number column {{{
     config = function () require('gitsigns').setup() end
   } -- }}}
 
@@ -460,13 +449,13 @@ return packer.startup(function(use)
 
   -- AUTOCOMPLETE {{{
 
-  use {'rafamadriz/friendly-snippets', -- snippets collection for a set of different programming languages {{{
+  use {'rafamadriz/friendly-snippets', -- Snippets collection for a set of different programming languages {{{
     config = function ()
       require('luasnip/loaders/from_vscode').lazy_load()
     end
   } -- }}}
 
-  use {'hrsh7th/nvim-cmp', -- autocomplete {{{
+  use {'hrsh7th/nvim-cmp', -- Autocomplete {{{
     requires = {
       'hrsh7th/cmp-nvim-lsp', -- LSP completions
       'hrsh7th/cmp-buffer', -- buffer completions
@@ -576,13 +565,6 @@ return packer.startup(function(use)
           { name = 'path' },
           { name = 'buffer' },
         },
-        -- confirm_opts = {
-        --   behavior = cmp.ConfirmBehavior.Replace,
-        --   select = false,
-        -- },
-        -- documentation = {
-        --   border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        -- },
       }
 
       cmp.setup.cmdline(':', {
@@ -604,7 +586,7 @@ return packer.startup(function(use)
 
   -- STYLE & DIAGNOSTICS {{{
 
-  use {'williamboman/nvim-lsp-installer', -- easy LSP install {{{
+  use {'williamboman/nvim-lsp-installer', -- Easy LSP install {{{
     config = function ()
       local lsp_installer = require('nvim-lsp-installer')
       local cmp_nvim_lsp = require('cmp_nvim_lsp')

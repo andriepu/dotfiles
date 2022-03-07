@@ -1,7 +1,7 @@
 function fish_mode_prompt
   switch $fish_bind_mode
     case default
-      set_color --bold bedb4d
+      set_color --bold blue
     case insert
       set_color --bold afafaf
     case replace_one

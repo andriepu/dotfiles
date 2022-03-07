@@ -180,13 +180,13 @@ function check_bat
   check_app \
     --name='bat' \
     --fn='command -q bat' \
-    --deps='bat_extras' \
+    --deps='batgrep' \
     --notes='https://github.com/sharkdp/bat#installation'
 end
 
-function check_bat_extras
+function check_batgrep
   check_app \
-    --name='bat-extras' \
+    --name='batgrep' \
     --fn='command -q batgrep' \
     --notes='https://github.com/eth-p/bat-extras#homebrew'
 end
