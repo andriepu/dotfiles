@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set -l apps 'fish kitty neovim openvpn'
+set -l apps 'fish kitty neovim blvpn'
 set -l apps (string split ' ' $apps)
 
 set -g unfinished 0
@@ -239,19 +239,19 @@ end
 
 # openvpn {{{
 
+function check_blvpn
+  check_app \
+    --name='blvpn' \
+    --fn='command -q ds-blvpn' \
+    --deps='openvpn' \
+    --notes='https://gitlab.cloud.bukalapak.io/bukalapak/devscripts/-/tree/master/src/scripts/blvpn'
+end
+
 function check_openvpn
   check_app \
     --name='openvpn' \
     --fn='command -q openvpn' \
-    --deps='oathtool' \
     --notes='https://openvpn.net/'
-end
-
-function check_oathtool
-  check_app \
-    --name='oathtool' \
-    --fn='command -q oathtool' \
-    --notes='https://www.nongnu.org/oath-toolkit/oathtool.1.html'
 end
 
 # }}}

@@ -15,8 +15,8 @@ kitty @ send-text --match title:Mock-User-Context 'yarn start '
 kitty @ launch --no-response --title VPN-Preprod-Azure --type tab --cwd "$HOME/Workspace/.vpn" fish
 kitty @ launch --no-response --title VPN-Prod-Gcp --cwd "$HOME/Workspace/.vpn" fish
 
-kitty @ send-text --match title:VPN-Preprod-Azure 'vpnpreprodazure'
-kitty @ send-text --match title:VPN-Prod-Gcp 'vpnprodgcp'
+kitty @ send-text --match title:VPN-Preprod-Azure 'ds-blvpn bl-azure-cloud-preproduction-00-udp.ovpn'
+kitty @ send-text --match title:VPN-Prod-Gcp 'ds-blvpn vm-openvpn-production-02.ovpn'
 
 kitty @ launch --no-response --title Neovim --type tab --cwd "$HOME/Workspace/" fish -C "nvim"
 
