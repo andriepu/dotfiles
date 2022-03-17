@@ -1,41 +1,28 @@
+source "$HOME/.config/fish/_config/2-abbr._git.fish"
+source "$HOME/.config/fish/_config/2-abbr._openvpn.fish"
 source "$HOME/.config/fish/_config/2-abbr._work.fish"
 
 # Editor {{{
 
-abbr -a -g v 'nvim'
-abbr -a -g vim 'nvim .'
+abbr -ag v 'nvim'
+abbr -ag vim 'nvim .'
 
-abbr -a -g v. "nvim $HOME/.dotfiles/conf/fish/_config/"
-
-# }}}
-
-# Git {{{
-
-abbr -a -g gc 'git checkout'
-abbr -a -g gcm 'git checkout master'
-abbr -a -g gst 'git status -s'
-abbr -a -g gd 'git diff'
-abbr -a -g ga 'git add -A'
-abbr -a -g gcmsg 'git commit -m'
-abbr -a -g gacmsg 'git add -A; git commit -m'
-abbr -a -g gre 'git reset'
-abbr -a -g gresoft 'git reset --soft HEAD\^'
-abbr -a -g grehard 'git reset --hard HEAD\^'
-abbr -a -g glog 'git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit --max-count=15'
-abbr -a -g gl "git pull; git pull origin (git branch | sed -n -e 's/^\* \(.*\)/\1/p')"
-abbr -a -g gp "git push origin (git branch | sed -n -e 's/^\* \(.*\)/\1/p')"
+abbr -ag efd "nvim $HOME/.dotfiles/conf/fd"
+abbr -ag efish "nvim $HOME/.dotfiles/conf/fish/_config/"
+abbr -ag ekitty "nvim $HOME/.dotfiles/conf/kitty"
+abbr -ag envim "nvim $HOME/.dotfiles/conf/nvim/lua"
 
 # }}}
 
 # Files {{{
 
-abbr -a -g cleanupds 'find . -type f -name *.DS_Store -ls -delete'
+abbr -ag cleanupds 'find . -name ".DS_Store" -ls -delete'
 
-abbr -a -g mv 'mv -v'
-abbr -a -g rm 'rm -i -v'
-abbr -a -g cp 'cp -v'
+abbr -ag mv 'mv -v'
+abbr -ag rm 'rm -iv'
+abbr -ag cp 'cp -v'
 
-abbr -a -g mkdir 'mkdir -p'
-abbr -a -g md 'mkdir -p'
+abbr -ag mkdir 'mkdir -p'
+abbr -ag md 'mkdir -p'
 
 # }}}

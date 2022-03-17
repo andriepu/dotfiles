@@ -115,7 +115,7 @@ return packer.startup(function(use)
   -- THEME & VISUALS {{{
 
   use {'EdenEast/nightfox.nvim', -- Colorscheme {{{
-    config = function() require('nightfox').load('nightfox') end
+    config = function() vim.cmd("colorscheme nightfox") end
   } -- }}}
 
   use 'kyazdani42/nvim-web-devicons' -- Icons
@@ -191,19 +191,6 @@ return packer.startup(function(use)
       local opts = { noremap = true, silent = true }
 
       map('n', '<Leader>qq', ':Alpha<CR>', opts)
-    end
-  } -- }}}
-
-  use {'folke/twilight.nvim', -- Autodim inactive code
-    config = function ()
-      require('twilight').setup()
-
-      vim.cmd [[
-        augroup twilight_mode
-          autocmd InsertEnter * :TwilightEnable
-          autocmd InsertLeave * :TwilightDisable
-        augroup END
-      ]]
     end
   } -- }}}
 
@@ -518,7 +505,7 @@ return packer.startup(function(use)
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           },
-          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = false },
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -645,6 +632,11 @@ return packer.startup(function(use)
         if server.name == 'sumneko_lua' then
           local sumneko_opts = require('lsp.sumneko_lua')
           setup_opts = vim.tbl_deep_extend('force', sumneko_opts, setup_opts)
+        end
+
+        if server.name == 'typescript' then
+          local volar_opts = require('lsp.volar')
+          setup_opts = vim.tbl_deep_extend('force', volar_opts, setup_opts)
         end
 
         -- This setup() function is exactly the same as lspconfig's setup function.

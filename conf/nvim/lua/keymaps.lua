@@ -1,3 +1,13 @@
+-- Modes
+--   normal_mode = "n"
+--   insert_mode = "i"
+--   visual_mode = "v"
+--   visual_block_mode = "x"
+--   term_mode = "t"
+--   command_mode = "c"
+--   selection_mode = "s"
+--
+
 local opts = { noremap = true }
 
 -- Shorten function name
@@ -6,14 +16,6 @@ local map = vim.api.nvim_set_keymap
 -- Remap space as leader key
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
-
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
 
 -- General
 map('i', 'jk', '<Esc>', opts) -- set "jk" as "escape" key
