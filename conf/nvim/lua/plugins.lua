@@ -361,7 +361,7 @@ return packer.startup(function(use)
       local map = vim.api.nvim_set_keymap
       local opts = { silent = true }
 
-      map('n', '<Leader><Space>', ':nohlsearch<CR> :lua require("specs").show_specs()<CR>', opts)
+      map('n', '<Leader><Space>', ':nohlsearch<CR>:lua require("specs").show_specs()<CR>', opts)
       map('n', 'n', 'n:lua require("specs").show_specs()<CR>', opts)
       map('n', 'N', 'N:lua require("specs").show_specs()<CR>', opts)
     end
