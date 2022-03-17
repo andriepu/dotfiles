@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set -l apps 'fish kitty neovim'
+set -l apps 'fish kitty neovim openvpn'
 set -l apps (string split ' ' $apps)
 
 set -g unfinished 0
@@ -237,16 +237,33 @@ end
 
 # }}}
 
+# openvpn {{{
+
+function check_openvpn
+  check_app \
+    --name='openvpn' \
+    --fn='command -q openvpn' \
+    --deps='oathtool' \
+    --notes='https://openvpn.net/'
+end
+
+function check_oathtool
+  check_app \
+    --name='oathtool' \
+    --fn='command -q oathtool' \
+    --notes='https://www.nongnu.org/oath-toolkit/oathtool.1.html'
+end
+
+# }}}
+
 # --- Output ---{{{
 
 for app in $apps
   check_$app
 end
 
-if test $unfinished -ne 0
-  echo -e $result
-  echo
-end
+echo -e $result
+echo
 
 # }}}
 
