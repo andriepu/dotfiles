@@ -10,15 +10,15 @@ kitty @ launch --no-response --title Hahen --cwd "$HOME/Workspace/hahen" fish -C
 kitty @ launch --no-response --title Quest --cwd "$HOME/Workspace/quest/" fish
 kitty @ launch --no-response --title Sievex-Frontend --cwd "$HOME/Workspace/sievex-frontend/" fish
 
+kitty @ launch --no-response --title VPN-Preprod-Azure --cwd "$HOME/Workspace/.vpn" fish
+kitty @ launch --no-response --title VPN-Prod-Gcp --cwd "$HOME/Workspace/.vpn" fish
+
 kitty @ send-text --match title:Mock-User-Context "yarn start "
 kitty @ send-text --match title:Majapahit "nvm use 14; yarn dev"
 kitty @ send-text --match title:Essos "nvm use 14; yarn dev"
 kitty @ send-text --match title:Westeros "nvm use 14; yarn dev"
 kitty @ send-text --match title:Quest "nvm use 14; yarn start"
 kitty @ send-text --match title:Sievex-Frontend "nvm use 14; yarn start"
-
-kitty @ launch --no-response --title VPN-Preprod-Azure --type tab --cwd "$HOME/Workspace/.vpn" fish
-kitty @ launch --no-response --title VPN-Prod-Gcp --cwd "$HOME/Workspace/.vpn" fish
 
 kitty @ send-text --match title:VPN-Preprod-Azure "ds-blvpn azure-preproduction"
 kitty @ send-text --match title:VPN-Prod-Gcp "ds-blvpn gcp-production"

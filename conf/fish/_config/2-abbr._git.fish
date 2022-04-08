@@ -1,5 +1,6 @@
 abbr -ag gc 'git checkout'
 abbr -ag gcm 'git checkout master'
+abbr -ag gcb 'git checkout -b'
 abbr -ag gst 'git status -s'
 abbr -ag gd 'git diff'
 abbr -ag ga 'git add -A'

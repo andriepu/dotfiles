@@ -1,6 +1,7 @@
 source "$HOME/.config/fish/_config/2-abbr._git.fish"
 source "$HOME/.config/fish/_config/2-abbr._openvpn.fish"
 source "$HOME/.config/fish/_config/2-abbr._work.fish"
+source "$HOME/.config/fish/_config/2-abbr._kubectl.fish"
 
 # Editor {{{
 

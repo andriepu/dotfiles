@@ -4,6 +4,8 @@ source "$HOME/.config/fish/_config/1-env._homebrew.fish"
 source "$HOME/.config/fish/_config/1-env._node.fish"
 source "$HOME/.config/fish/_config/1-env._exa.fish"
 source "$HOME/.config/fish/_config/1-env._openvpn.fish"
+source "$HOME/.config/fish/_config/1-env._gcloud.fish"
+source "$HOME/.config/fish/_config/1-env._pnpm.fish"
 
 # Set language {{{
 
