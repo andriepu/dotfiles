@@ -210,7 +210,11 @@ return packer.startup(function(use)
           },
           oldfiles = {
             cwd_only = true
-          }
+          },
+          buffers = {
+            sort_lastused = true,
+            sort_mru = true
+          },
         }
       }
 
@@ -630,13 +634,18 @@ return packer.startup(function(use)
         }
 
         if server.name == 'sumneko_lua' then
-          local sumneko_opts = require('lsp.sumneko_lua')
-          setup_opts = vim.tbl_deep_extend('force', sumneko_opts, setup_opts)
+          local opts = require('lsp.sumneko_lua')
+          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
         end
 
         if server.name == 'typescript' then
-          local volar_opts = require('lsp.volar')
-          setup_opts = vim.tbl_deep_extend('force', volar_opts, setup_opts)
+          local opts = require('lsp.volar')
+          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
+        end
+
+        if server.name == 'eslint' then
+          local opts = require('lsp.eslint')
+          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
         end
 
         -- This setup() function is exactly the same as lspconfig's setup function.
