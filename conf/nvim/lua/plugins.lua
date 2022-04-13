@@ -134,7 +134,7 @@ return packer.startup(function(use)
         }
       }
     end
-  } -- }}
+  } -- }}}
 
   use {'ojroques/nvim-hardline', -- Status bar {{{
     config = function() require 'hardline'.setup{} end
@@ -598,8 +598,9 @@ return packer.startup(function(use)
         'cssls',
         'eslint',
         'html',
+        'jsonls',
+        'sumneko_lua',
         'volar',
-        'yamlls',
       }
 
       for _, name in pairs(servers) do
@@ -633,18 +634,27 @@ return packer.startup(function(use)
           capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
         }
 
+        if server.name == 'cssls' then
+          setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
+        end
+
+        if server.name == 'html' then
+          setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
+        end
+
+        if server.name == 'jsonls' then
+          setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
+          local opts = require('lsp.jsonls')
+          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
+        end
+
         if server.name == 'sumneko_lua' then
           local opts = require('lsp.sumneko_lua')
           setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
         end
 
-        if server.name == 'typescript' then
+        if server.name == 'volar' then
           local opts = require('lsp.volar')
-          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
-        end
-
-        if server.name == 'eslint' then
-          local opts = require('lsp.eslint')
           setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
         end
 
