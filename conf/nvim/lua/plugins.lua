@@ -390,7 +390,7 @@ return packer.startup(function(use)
     config = function()
       require 'toggleterm'.setup{
         open_mapping = [[<C-\>]],
-        direction = 'horizontal',
+        direction = 'float',
         start_in_insert = true,
         float_opts = { border = 'curved' },
         size = function(term)
@@ -413,7 +413,7 @@ return packer.startup(function(use)
       end
 
       local map = vim.api.nvim_set_keymap
-      map('n', [[<C-A-\>]], ':ToggleTerm direction=float<CR>', {noremap = true})
+      map('n', [[<C-A-\>]], ':ToggleTerm direction=horizontal<CR>', {noremap = true})
 
       vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
       vim.cmd 'autocmd TermOpen * setlocal signcolumn=yes'
