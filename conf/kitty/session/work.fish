@@ -23,6 +23,6 @@ kitty @ send-text --match title:Sievex-Frontend "nvm use 14; yarn start"
 kitty @ send-text --match title:VPN-Preprod-Azure "ds-blvpn azure-preproduction"
 kitty @ send-text --match title:VPN-Prod-Gcp "ds-blvpn gcp-production"
 
-kitty @ launch --no-response --title Neovim --type tab --cwd "$HOME/Workspace/" fish -C "nvim"
+kitty @ launch --no-response --title Neovim --type tab --cwd "$HOME/Workspace/" fish
 
 kitty @ close-window --match title:Initial-Service
