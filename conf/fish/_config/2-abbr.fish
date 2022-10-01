@@ -2,6 +2,8 @@ source "$HOME/.config/fish/_config/2-abbr._git.fish"
 source "$HOME/.config/fish/_config/2-abbr._openvpn.fish"
 source "$HOME/.config/fish/_config/2-abbr._work.fish"
 source "$HOME/.config/fish/_config/2-abbr._kubectl.fish"
+source "$HOME/.config/fish/_config/2-abbr._ssh.fish"
+source "$HOME/.config/fish/_config/2-abbr._pnpm.fish"
 
 # Editor {{{
 
@@ -20,7 +22,7 @@ abbr -ag envim "nvim $HOME/.dotfiles/conf/nvim/lua"
 abbr -ag cleanupds 'find . -name ".DS_Store" -ls -delete'
 
 abbr -ag mv 'mv -v'
-abbr -ag rm 'rm -iv'
+abbr -ag rm 'rm -ivrf'
 abbr -ag cp 'cp -v'
 
 abbr -ag mkdir 'mkdir -p'

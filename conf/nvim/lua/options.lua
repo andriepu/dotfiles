@@ -34,6 +34,10 @@ local options = {
   wrap = false,                            -- display lines as one long line
 }
 
+vim.cmd [[
+  autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+]]
+
 for k, v in pairs(options) do
   vim.opt[k] = v
 end

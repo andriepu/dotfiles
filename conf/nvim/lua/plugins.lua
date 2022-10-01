@@ -72,7 +72,7 @@ return packer.startup(function(use)
       local config = {
         signs = { active = signs },
         update_in_insert = true,
-        underline = true,
+        underline = false,
         severity_sort = true,
         float = {
           focusable = false,
@@ -92,6 +92,12 @@ return packer.startup(function(use)
 
       vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = 'rounded',
+      })
+
+      vim.api.nvim_create_autocmd('BufNewFile', {
+        pattern = {'*.ts', '*.js', '*.vue', '*.json', '*.md' },
+        command = 'LspRestart',
+        group = vim.api.nvim_create_augroup('Autocmd_LspRestart', {}),
       })
     end
   } -- }}}
@@ -204,6 +210,9 @@ return packer.startup(function(use)
   use {'nvim-telescope/telescope.nvim', -- Fuzzy finder {{{
     config = function ()
       require 'telescope'.setup {
+        defaults = {
+          file_ignore_patterns = {'node_modules', '.yarn'}
+        },
         pickers = {
           find_files = {
             find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '-H' }
@@ -553,11 +562,11 @@ return packer.startup(function(use)
           end,
         },
         sources = {
-          { name = 'luasnip' },
           { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
           { name = 'path' },
+          { name = 'luasnip' },
           { name = 'buffer' },
+          { name = 'nvim_lua' },
         },
       }
 
@@ -578,7 +587,7 @@ return packer.startup(function(use)
   -- AUTOCOMPLETE }}}
 
 
-  -- STYLE & DIAGNOSTICS {{{
+  -- FORMATTING & DIAGNOSTICS {{{
 
   use {'williamboman/nvim-lsp-installer', -- Easy LSP install {{{
     config = function ()
@@ -598,11 +607,10 @@ return packer.startup(function(use)
       -- Include the servers you want to have installed by default below
       local servers = {
         'bashls',
-        'cssls',
         'eslint',
-        'html',
         'jsonls',
         'sumneko_lua',
+        'tailwindcss',
         'volar',
       }
 
@@ -637,14 +645,6 @@ return packer.startup(function(use)
           capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
         }
 
-        if server.name == 'cssls' then
-          setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
-        end
-
-        if server.name == 'html' then
-          setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
-        end
-
         if server.name == 'jsonls' then
           setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
           local opts = require('lsp.jsonls')
@@ -661,6 +661,23 @@ return packer.startup(function(use)
           setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
         end
 
+        if server.name == 'eslint' then
+          local opts = require('lsp.eslint')
+          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
+
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            pattern = {'*.ts', '*.js', '*.vue' },
+            command = 'exec "EslintFixAll" | exec "Prettier"',
+            group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_ESLint_Prettier', {}),
+          })
+
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            pattern = { '*.md', '*.json'  },
+            command = 'Prettier',
+            group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_Prettier', {}),
+          })
+        end
+
         -- This setup() function is exactly the same as lspconfig's setup function.
         -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
         server:setup(setup_opts)
@@ -668,7 +685,82 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  -- STYLE & DIAGNOSTICS }}}
+  use {'prettier/vim-prettier', run = 'npm install --production', -- Prettier
+    vim.cmd [[
+      let g:prettier#autoformat_config_present = 0
+      let g:prettier#autoformat_require_pragma = 0
+      let g:prettier#quickfix_auto_focus = 0
+      let g:prettier#quickfix_enabled = 0
+    ]]
+  }
+
+  -- FORMATTING & DIAGNOSTICS }}}
+
+
+  -- DEV {{{
+
+  use {'mfussenegger/nvim-dap',
+    config = function ()
+      local fn = vim.fn
+
+      local node_debug_path = fn.stdpath 'data' .. '/site/pack/packer/custom/vscode-node-debug2'
+
+      if fn.empty(fn.glob(node_debug_path)) > 0 then
+        fn.system {
+          'git',
+          'clone',
+          '--depth',
+          '1',
+          'https://github.com/microsoft/vscode-node-debug2.git',
+          node_debug_path,
+        }
+      end
+
+      local dap = require('dap')
+
+      dap.adapters.node2 = {
+        type = 'executable',
+        command = 'node',
+        args = {node_debug_path .. '/out/src/nodeDebug.js'},
+      }
+
+      dap.configurations.javascript = {
+        {
+          name = 'Launch',
+          type = 'node2',
+          request = 'launch',
+          program = '${file}',
+          cwd = vim.fn.getcwd(),
+          sourceMaps = true,
+          protocol = 'inspector',
+          console = 'integratedTerminal',
+        },
+        {
+          -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+          name = 'Attach to process',
+          type = 'node2',
+          request = 'attach',
+          processId = require'dap.utils'.pick_process,
+        },
+      }
+    end
+  }
+
+  use {'David-Kunz/jester', -- jest
+    config = function ()
+      local map = vim.api.nvim_set_keymap
+      require('jester').setup({
+        cmd = "jest --no-cache -t '$result' -- $file",
+        terminal_cmd = ':ToggleTerm 9',
+      })
+
+      map('n', '<Leader>jr', ':lua require"jester".run()<CR>', {silent=true})
+      map('n', '<Leader>jf', ':lua require"jester".run_file()<CR>', {silent=true})
+      map('n', '<Leader>jl', ':lua require"jester".run_last()<CR>', {silent=true})
+    end
+  }
+
+  -- DEV }}}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

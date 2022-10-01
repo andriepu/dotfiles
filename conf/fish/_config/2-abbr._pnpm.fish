@@ -1,0 +1,1 @@
+abbr -ag pn 'pnpm'
