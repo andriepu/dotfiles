@@ -26,6 +26,13 @@ map('n', 're', '<C-r>', opts) -- redo
 map('v', '<', '<gv', opts) -- prevent exiting Visual mode when shifting indentation
 map('v', '>', '>gv', opts)
 
+map('n', '∆', ':m .+1<CR>==', opts)
+map('n', '˚', ':m .-2<CR>==', opts)
+map('i', '∆', '<Esc>:m .+1<CR>==gi', opts)
+map('i', '˚', '<Esc>:m .-2<CR>==gi', opts)
+map('v', '∆', ':m \'>+1<CR>gv=gv', opts)
+map('v', '˚', ':m \'<-2<CR>gv=gv', opts)
+
 -- Navigations
 map('n', '<C-j>', '<C-W>j', opts) -- move between panes
 map('n', '<C-k>', '<C-W>k', opts)

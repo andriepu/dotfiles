@@ -284,27 +284,6 @@ return packer.startup(function(use)
   --   end
   -- } -- }}}
 
-  use {'booperlv/nvim-gomove', -- Shift text position (up/down/left/right) {{{
-    config = function ()
-      require('gomove').setup({
-        map_defaults = false
-      })
-
-      local map = vim.api.nvim_set_keymap
-      local opts = { silent = true }
-
-      map('n', '<S-h>', '<Plug>GoNSMLeft', opts)
-      map('n', '<S-j>', '<Plug>GoNSMDown', opts)
-      map('n', '<S-k>', '<Plug>GoNSMUp', opts)
-      map('n', '<S-l>', '<Plug>GoNSMRight', opts)
-
-      map('x', '<S-h>', '<Plug>GoVSMLeft', opts)
-      map('x', '<S-j>', '<Plug>GoVSMDown', opts)
-      map('x', '<S-k>', '<Plug>GoVSMUp', opts)
-      map('x', '<S-l>', '<Plug>GoVSMRight', opts)
-    end
-  } -- }}}
-
   use {'svermeulen/vim-cutlass', -- Overrides the delete operations to actually just delete without affecting current yank {{{
     config = function()
       local map = vim.api.nvim_set_keymap
