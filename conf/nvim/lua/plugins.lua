@@ -56,51 +56,51 @@ return packer.startup(function(use)
 
   use 'nvim-lua/plenary.nvim' -- Useful lua functions used ny lots of plugins
 
-  use {'neovim/nvim-lspconfig', -- Enable LSP {{{
-    config = function ()
-      local signs = {
-        { name = 'DiagnosticSignError', text = ' ' },
-        { name = 'DiagnosticSignWarn', text = ' ' },
-        { name = 'DiagnosticSignHint', text = ' ' },
-        { name = 'DiagnosticSignInfo', text = ' ' },
-      }
+  -- use {'neovim/nvim-lspconfig', -- Enable LSP {{{
+  --   config = function ()
+  --     local signs = {
+  --       { name = 'DiagnosticSignError', text = ' ' },
+  --       { name = 'DiagnosticSignWarn', text = ' ' },
+  --       { name = 'DiagnosticSignHint', text = ' ' },
+  --       { name = 'DiagnosticSignInfo', text = ' ' },
+  --     }
 
-      for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-      end
+  --     for _, sign in ipairs(signs) do
+  --       vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  --     end
 
-      local config = {
-        signs = { active = signs },
-        update_in_insert = true,
-        underline = false,
-        severity_sort = true,
-        float = {
-          focusable = false,
-          style = 'minimal',
-          border = 'rounded',
-          source = 'always',
-          header = '',
-          prefix = '',
-        },
-      }
+  --     local config = {
+  --       signs = { active = signs },
+  --       update_in_insert = true,
+  --       underline = false,
+  --       severity_sort = true,
+  --       float = {
+  --         focusable = false,
+  --         style = 'minimal',
+  --         border = 'rounded',
+  --         source = 'always',
+  --         header = '',
+  --         prefix = '',
+  --       },
+  --     }
 
-      vim.diagnostic.config(config)
+  --     vim.diagnostic.config(config)
 
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = 'rounded',
-      })
+  --     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  --       border = 'rounded',
+  --     })
 
-      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = 'rounded',
-      })
+  --     vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  --       border = 'rounded',
+  --     })
 
-      vim.api.nvim_create_autocmd('BufNewFile', {
-        pattern = {'*.ts', '*.js', '*.vue', '*.json', '*.md' },
-        command = 'LspRestart',
-        group = vim.api.nvim_create_augroup('Autocmd_LspRestart', {}),
-      })
-    end
-  } -- }}}
+  --     vim.api.nvim_create_autocmd('BufNewFile', {
+  --       pattern = {'*.ts', '*.js', '*.vue', '*.json', '*.md' },
+  --       command = 'LspRestart',
+  --       group = vim.api.nvim_create_augroup('Autocmd_LspRestart', {}),
+  --     })
+  --   end
+  -- } -- }}}
 
   use {'nvim-treesitter/nvim-treesitter',  -- Syntax engine {{{
     run = ':TSUpdate',
@@ -150,7 +150,7 @@ return packer.startup(function(use)
     config = function ()
       require('indent_blankline').setup {
         buftype_exclude = {'terminal', 'quickfix'},
-        filetype_exclude = {'help', 'alpha', 'lsp-installer', 'lspinfo', 'packer'},
+        filetype_exclude = {'help', 'alpha', 'lspinfo', 'packer'},
       }
     end
   } -- }}}
@@ -264,25 +264,11 @@ return packer.startup(function(use)
 
   use 'tpope/vim-surround' -- Easy edit pairs
 
-   -- use {'windwp/nvim-autopairs', -- auto pairing {{{
-   --  config = function ()
-   --    require('nvim-autopairs').setup()
-   --  end
-   -- } -- }}}
-
-  -- use {'steelsojka/pears.nvim', -- auto bracket pairs {{{
-  --   config = function()
-  --     local R = require 'pears.rule'
-
-  --     require 'pears'.setup(function(conf)
-  --       conf.pair("'", {
-  --         close = "'",
-  --         -- Don't expand a quote if it comes after an alpha character
-  --         should_expand = R.not_(R.start_of_context "[a-zA-Z]")
-  --       })
-  --     end)
-  --   end
-  -- } -- }}}
+  use {'windwp/nvim-autopairs', -- auto pairing {{{
+    config = function ()
+      require('nvim-autopairs').setup()
+    end
+  } -- }}}
 
   use {'svermeulen/vim-cutlass', -- Overrides the delete operations to actually just delete without affecting current yank {{{
     config = function()
@@ -429,13 +415,7 @@ return packer.startup(function(use)
   -- GIT }}}
 
 
-  -- AUTOCOMPLETE {{{
-
-  use {'rafamadriz/friendly-snippets', -- Snippets collection for a set of different programming languages {{{
-    config = function ()
-      require('luasnip/loaders/from_vscode').lazy_load()
-    end
-  } -- }}}
+  -- FORMATTING & AUTOCOMPLETE {{{
 
   use {'hrsh7th/nvim-cmp', -- Autocomplete {{{
     requires = {
@@ -444,7 +424,6 @@ return packer.startup(function(use)
       'hrsh7th/cmp-path', -- path completions
       'hrsh7th/cmp-cmdline', -- cmdline completions
       'hrsh7th/cmp-nvim-lua', -- nvim lua completions
-      'saadparwaiz1/cmp_luasnip' -- snippet completions
     },
     config = function ()
       local cmp = require'cmp'
@@ -563,183 +542,136 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  -- AUTOCOMPLETE }}}
-
-
-  -- FORMATTING & DIAGNOSTICS {{{
-
-  use {'williamboman/nvim-lsp-installer', -- Easy LSP install {{{
-    config = function ()
-      local lsp_installer = require('nvim-lsp-installer')
-      local cmp_nvim_lsp = require('cmp_nvim_lsp')
-
-      lsp_installer.settings({
+  use {'williamboman/mason.nvim', 
+    config = function()
+      require('mason').setup({
         ui = {
           icons = {
-            server_installed = " ",
-            server_pending = " ",
-            server_uninstalled = " "
+            package_installed = " ",
+            package_pending = " ",
+            package_uninstalled = " "
           }
         }
       })
+    end
+  }
 
-      -- Include the servers you want to have installed by default below
-      local servers = {
-        'bashls',
-        'eslint',
-        'jsonls',
-        'sumneko_lua',
-        'tailwindcss',
-        'volar',
+  use {'williamboman/mason-lspconfig.nvim',
+    config = function ()
+      local mason_lspconfig = require('mason-lspconfig')
+      local cmp_nvim_lsp = require('cmp_nvim_lsp')
+
+      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar' }
+
+      mason_lspconfig.setup({
+        ensure_installed = servers
+      })
+
+      local setup_opts = {
+        on_attach = function(_, bufnr)
+          local map = vim.api.nvim_set_keymap
+          local opts = { noremap = true, silent = true }
+
+          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+          print 'asdad'
+
+          map('n', '<leader>ld', ':lua vim.lsp.buf.definition()<CR>', opts) --> jumps to the definition of the symbol under the cursor
+          map('n', '<leader>lh', ':lua vim.lsp.buf.hover()<CR>', opts) --> information about the symbol under the cursos in a floating window
+          map('n', '<leader>li', ':lua vim.lsp.buf.implementation()<CR>', opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
+          map('n', '<leader>rn', ':lua vim.lsp.util.rename()<CR>', opts) --> renaname old_fname to new_fname
+          map('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', opts) --> selects a code action available at the current cursor position
+          map('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', opts) --> lists all the references to the symbl under the cursor in the quickfix window
+          map('n', '<leader>ld', ':lua vim.diagnostic.open_float()<CR>', opts)
+          map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
+          map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
+          map('n', '<leader>lq', ':lua vim.diagnostic.setloclist()<CR>', opts)
+          map('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<CR>', opts) --> formats the current buffer
+        end,
+        capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
       }
 
       for _, name in pairs(servers) do
-        local server_is_found, server = lsp_installer.get_server(name)
-        if server_is_found and not server:is_installed() then
-          print('Installing ' .. name)
-          server:install()
+        local status, opts = pcall(require, 'lsp.' .. name)
+        if (status) then
+          require('lspconfig')[name].setup(vim.tbl_deep_extend('force', opts, setup_opts))
+        else
+          require('lspconfig')[name].setup(setup_opts)
         end
       end
-
-      lsp_installer.on_server_ready(function(server)
-        local setup_opts = {
-          on_attach = function (_, bufnr)
-            local map = vim.api.nvim_set_keymap
-            local opts = { noremap = true, silent = true }
-
-            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-            map('n', '<leader>ld', ':lua vim.lsp.buf.definition()<CR>', opts) --> jumps to the definition of the symbol under the cursor
-            map('n', '<leader>lh', ':lua vim.lsp.buf.hover()<CR>', opts) --> information about the symbol under the cursos in a floating window
-            map('n', '<leader>li', ':lua vim.lsp.buf.implementation()<CR>', opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
-            map('n', '<leader>rn', ':lua vim.lsp.util.rename()<CR>', opts) --> renaname old_fname to new_fname
-            map('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', opts) --> selects a code action available at the current cursor position
-            map('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', opts) --> lists all the references to the symbl under the cursor in the quickfix window
-            map('n', '<leader>ld', ':lua vim.diagnostic.open_float()<CR>', opts)
-            map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
-            map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
-            map('n', '<leader>lq', ':lua vim.diagnostic.setloclist()<CR>', opts)
-            map('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<CR>', opts) --> formats the current buffer
-          end,
-          capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-        }
-
-        if server.name == 'jsonls' then
-          setup_opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
-          local opts = require('lsp.jsonls')
-          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
-        end
-
-        if server.name == 'sumneko_lua' then
-          local opts = require('lsp.sumneko_lua')
-          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
-        end
-
-        if server.name == 'volar' then
-          local opts = require('lsp.volar')
-          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
-        end
-
-        if server.name == 'eslint' then
-          local opts = require('lsp.eslint')
-          setup_opts = vim.tbl_deep_extend('force', opts, setup_opts)
-
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            pattern = {'*.ts', '*.js', '*.vue' },
-            command = 'exec "EslintFixAll" | exec "Prettier"',
-            group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_ESLint_Prettier', {}),
-          })
-
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            pattern = { '*.md', '*.json'  },
-            command = 'Prettier',
-            group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_Prettier', {}),
-          })
-        end
-
-        -- This setup() function is exactly the same as lspconfig's setup function.
-        -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-        server:setup(setup_opts)
-      end)
     end
-  } -- }}}
+  }
+  use {'neovim/nvim-lspconfig',
+    config = function ()
+      local signs = {
+        { name = 'DiagnosticSignError', text = ' ' },
+        { name = 'DiagnosticSignWarn', text = ' ' },
+        { name = 'DiagnosticSignHint', text = ' ' },
+        { name = 'DiagnosticSignInfo', text = ' ' },
+      }
 
-  use {'prettier/vim-prettier', run = 'npm install --production', -- Prettier
-    vim.cmd [[
-      let g:prettier#autoformat_config_present = 0
-      let g:prettier#autoformat_require_pragma = 0
-      let g:prettier#quickfix_auto_focus = 0
-      let g:prettier#quickfix_enabled = 0
-    ]]
+      for _, sign in ipairs(signs) do
+        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+      end
+
+      local config = {
+        signs = { active = signs },
+        update_in_insert = true,
+        underline = false,
+        severity_sort = true,
+        float = {
+          focusable = false,
+          style = 'minimal',
+          border = 'rounded',
+          source = 'always',
+          header = '',
+          prefix = '',
+        },
+      }
+
+      vim.diagnostic.config(config)
+
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = 'rounded',
+      })
+
+      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = 'rounded',
+      })
+
+      vim.api.nvim_create_autocmd('BufNewFile', {
+        pattern = {'*.ts', '*.js', '*.vue', '*.json', '*.md' },
+        command = 'LspRestart',
+        group = vim.api.nvim_create_augroup('Autocmd_LspRestart', {}),
+      })
+    end
+  }
+
+  use {'prettier/vim-prettier', -- Prettier
+    run = 'npm install --production',
+    config = function ()
+      vim.cmd [[
+        let g:prettier#autoformat_config_present = 0
+        let g:prettier#autoformat_require_pragma = 0
+        let g:prettier#quickfix_auto_focus = 0
+        let g:prettier#quickfix_enabled = 0
+      ]]
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = {'*.ts', '*.js', '*.vue' },
+        command = 'exec "EslintFixAll" | exec "Prettier"',
+        group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_ESLint_Prettier', {}),
+      })
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = { '*.md', '*.json'  },
+        command = 'Prettier',
+        group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_Prettier', {}),
+      })
+    end
   }
 
   -- FORMATTING & DIAGNOSTICS }}}
-
-
-  -- DEV {{{
-
-  use {'mfussenegger/nvim-dap',
-    config = function ()
-      local fn = vim.fn
-
-      local node_debug_path = fn.stdpath 'data' .. '/site/pack/packer/custom/vscode-node-debug2'
-
-      if fn.empty(fn.glob(node_debug_path)) > 0 then
-        fn.system {
-          'git',
-          'clone',
-          '--depth',
-          '1',
-          'https://github.com/microsoft/vscode-node-debug2.git',
-          node_debug_path,
-        }
-      end
-
-      local dap = require('dap')
-
-      dap.adapters.node2 = {
-        type = 'executable',
-        command = 'node',
-        args = {node_debug_path .. '/out/src/nodeDebug.js'},
-      }
-
-      dap.configurations.javascript = {
-        {
-          name = 'Launch',
-          type = 'node2',
-          request = 'launch',
-          program = '${file}',
-          cwd = vim.fn.getcwd(),
-          sourceMaps = true,
-          protocol = 'inspector',
-          console = 'integratedTerminal',
-        },
-        {
-          -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-          name = 'Attach to process',
-          type = 'node2',
-          request = 'attach',
-          processId = require'dap.utils'.pick_process,
-        },
-      }
-    end
-  }
-
-  use {'David-Kunz/jester', -- jest
-    config = function ()
-      local map = vim.api.nvim_set_keymap
-      require('jester').setup({
-        cmd = "jest --no-cache -t '$result' -- $file",
-        terminal_cmd = ':ToggleTerm 9',
-      })
-
-      map('n', '<Leader>jr', ':lua require"jester".run()<CR>', {silent=true})
-      map('n', '<Leader>jf', ':lua require"jester".run_file()<CR>', {silent=true})
-      map('n', '<Leader>jl', ':lua require"jester".run_last()<CR>', {silent=true})
-    end
-  }
-
-  -- DEV }}}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

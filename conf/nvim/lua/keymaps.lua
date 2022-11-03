@@ -32,6 +32,10 @@ map('i', '∆', '<Esc>:m .+1<CR>==gi', opts)
 map('i', '˚', '<Esc>:m .-2<CR>==gi', opts)
 map('v', '∆', ':m \'>+1<CR>gv=gv', opts)
 map('v', '˚', ':m \'<-2<CR>gv=gv', opts)
+map('n', '<S-j>', ':m .+1<CR>==', opts)
+map('n', '<S-k>', ':m .-2<CR>==', opts)
+map('v', '<S-j>', ':m \'>+1<CR>gv=gv', opts)
+map('v', '<S-k>', ':m \'<-2<CR>gv=gv', opts)
 
 -- Navigations
 map('n', '<C-j>', '<C-W>j', opts) -- move between panes
