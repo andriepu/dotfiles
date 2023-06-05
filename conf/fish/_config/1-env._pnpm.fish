@@ -3,4 +3,5 @@
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 
 set -gx PNPM_HOME "/Users/andriepu/Library/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
+
+fish_add_path $PNPM_HOME 

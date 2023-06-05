@@ -105,12 +105,12 @@ return packer.startup(function(use)
   use {'nvim-treesitter/nvim-treesitter',  -- Syntax engine {{{
     run = ':TSUpdate',
     config = function ()
-      require'nvim-treesitter.configs'.setup {
+      require('nvim-treesitter.configs').setup {
         highlight = {
           enable = true,
         }
       }
-    end
+    end,
   } -- }}}
 
   use 'L3MON4D3/LuaSnip' -- Snippet engine
@@ -183,12 +183,12 @@ return packer.startup(function(use)
 
       dashboard.section.buttons.val = {
         dashboard.button( '-', '   Explore' , ':Ex<CR>'),
-        dashboard.button( 'r', '   Recents' , ':Telescope oldfiles<CR>'),
-        dashboard.button( 'f', '   Find Files' , ':Telescope find_files<CR>'),
-        dashboard.button( '/', '   Search Text' , ':Telescope live_grep<CR>'),
+        dashboard.button( 'r', '   Recents' , ':Telescope oldfiles<CR>'),
+        dashboard.button( 'f', ' 󰱽  Find Files' , ':Telescope find_files<CR>'),
+        dashboard.button( '/', ' 󱩾  Search Text' , ':Telescope live_grep<CR>'),
         dashboard.button( 'o', '   Options' , ':e $HOME/.config/nvim | :cd %:p:h | wincmd k | pwd<CR>'),
-        dashboard.button( 'p', '   Plugins' , ':cd $HOME/.config/nvim | :e lua/plugins.lua | wincmd k | pwd<CR>'),
-        dashboard.button( 'q', '   Quit', ':q<CR>'),
+        dashboard.button( 'p', '   Plugins' , ':cd $HOME/.config/nvim | :e lua/plugins.lua | wincmd k | pwd<CR>'),
+        dashboard.button( 'q', ' 󰩈  Quit', ':q<CR>'),
       }
 
       require'alpha'.setup(dashboard.config)
@@ -416,6 +416,12 @@ return packer.startup(function(use)
 
 
   -- FORMATTING & AUTOCOMPLETE {{{
+  
+  use {'windwp/nvim-ts-autotag', -- Autoclose tag {{{
+    config = function ()
+      require('nvim-ts-autotag').setup()
+    end
+  } -- }}}
 
   use {'hrsh7th/nvim-cmp', -- Autocomplete {{{
     requires = {
@@ -435,31 +441,31 @@ return packer.startup(function(use)
       end
 
       local kind_icons = {
-        Text = "",
-        Method = "m",
-        Function = "",
+        Text = "󰊄",
+        Method = "",
+        Function = "󰊕",
         Constructor = "",
-        Field = "",
-        Variable = "",
-        Class = "",
+        Field = "󰽐",
+        Variable = "",
+        Class = "",
         Interface = "",
-        Module = "",
+        Module = "󱒌",
         Property = "",
         Unit = "",
-        Value = "",
+        Value = "",
         Enum = "",
-        Keyword = "",
+        Keyword = "",
         Snippet = "",
-        Color = "",
-        File = "",
+        Color = "",
+        File = "",
         Reference = "",
-        Folder = "",
+        Folder = "",
         EnumMember = "",
-        Constant = "",
+        Constant = "",
         Struct = "",
         Event = "",
-        Operator = "",
-        TypeParameter = "",
+        Operator = "",
+        TypeParameter = "",
       }
 
       cmp.setup {
@@ -542,8 +548,15 @@ return packer.startup(function(use)
     end
   } -- }}}
 
-  use {'williamboman/mason.nvim', 
-    config = function()
+  use {'williamboman/mason.nvim'}
+
+  use {'williamboman/mason-lspconfig.nvim',
+    config = function ()
+      local mason_lspconfig = require('mason-lspconfig')
+      local cmp_nvim_lsp = require('cmp_nvim_lsp')
+
+      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'ltex', 'dartls' }
+
       require('mason').setup({
         ui = {
           icons = {
@@ -553,18 +566,9 @@ return packer.startup(function(use)
           }
         }
       })
-    end
-  }
-
-  use {'williamboman/mason-lspconfig.nvim',
-    config = function ()
-      local mason_lspconfig = require('mason-lspconfig')
-      local cmp_nvim_lsp = require('cmp_nvim_lsp')
-
-      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar' }
 
       mason_lspconfig.setup({
-        ensure_installed = servers
+        -- ensure_installed = servers
       })
 
       local setup_opts = {
@@ -573,8 +577,6 @@ return packer.startup(function(use)
           local opts = { noremap = true, silent = true }
 
           vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-          print 'asdad'
 
           map('n', '<leader>ld', ':lua vim.lsp.buf.definition()<CR>', opts) --> jumps to the definition of the symbol under the cursor
           map('n', '<leader>lh', ':lua vim.lsp.buf.hover()<CR>', opts) --> information about the symbol under the cursos in a floating window
@@ -603,6 +605,11 @@ return packer.startup(function(use)
   }
   use {'neovim/nvim-lspconfig',
     config = function ()
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+
+      map('n', '<Leader>lspr', ':LspRestart<CR>', opts)
+
       local signs = {
         { name = 'DiagnosticSignError', text = ' ' },
         { name = 'DiagnosticSignWarn', text = ' ' },
@@ -638,12 +645,6 @@ return packer.startup(function(use)
       vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = 'rounded',
       })
-
-      vim.api.nvim_create_autocmd('BufNewFile', {
-        pattern = {'*.ts', '*.js', '*.vue', '*.json', '*.md' },
-        command = 'LspRestart',
-        group = vim.api.nvim_create_augroup('Autocmd_LspRestart', {}),
-      })
     end
   }
 
@@ -664,16 +665,16 @@ return packer.startup(function(use)
       })
 
       vim.api.nvim_create_autocmd('BufWritePre', {
-        pattern = { '*.md', '*.json'  },
+        pattern = { '*.json' },
         command = 'Prettier',
         group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_Prettier', {}),
       })
     end
   }
-
+    
   -- FORMATTING & DIAGNOSTICS }}}
 
-  -- Automatically set up your configuration after cloning packer.nvim
+  -- Automatically set up your configuration<img v-bind="$attrs" /> after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
     require('packer').sync()
