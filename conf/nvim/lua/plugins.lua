@@ -56,52 +56,6 @@ return packer.startup(function(use)
 
   use 'nvim-lua/plenary.nvim' -- Useful lua functions used ny lots of plugins
 
-  -- use {'neovim/nvim-lspconfig', -- Enable LSP {{{
-  --   config = function ()
-  --     local signs = {
-  --       { name = 'DiagnosticSignError', text = ' ' },
-  --       { name = 'DiagnosticSignWarn', text = ' ' },
-  --       { name = 'DiagnosticSignHint', text = ' ' },
-  --       { name = 'DiagnosticSignInfo', text = ' ' },
-  --     }
-
-  --     for _, sign in ipairs(signs) do
-  --       vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  --     end
-
-  --     local config = {
-  --       signs = { active = signs },
-  --       update_in_insert = true,
-  --       underline = false,
-  --       severity_sort = true,
-  --       float = {
-  --         focusable = false,
-  --         style = 'minimal',
-  --         border = 'rounded',
-  --         source = 'always',
-  --         header = '',
-  --         prefix = '',
-  --       },
-  --     }
-
-  --     vim.diagnostic.config(config)
-
-  --     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  --       border = 'rounded',
-  --     })
-
-  --     vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  --       border = 'rounded',
-  --     })
-
-  --     vim.api.nvim_create_autocmd('BufNewFile', {
-  --       pattern = {'*.ts', '*.js', '*.vue', '*.json', '*.md' },
-  --       command = 'LspRestart',
-  --       group = vim.api.nvim_create_augroup('Autocmd_LspRestart', {}),
-  --     })
-  --   end
-  -- } -- }}}
-
   use {'nvim-treesitter/nvim-treesitter',  -- Syntax engine {{{
     run = ':TSUpdate',
     config = function ()
@@ -148,9 +102,11 @@ return packer.startup(function(use)
 
   use {'lukas-reineke/indent-blankline.nvim', -- Show indentation {{{
     config = function ()
-      require('indent_blankline').setup {
-        buftype_exclude = {'terminal', 'quickfix'},
-        filetype_exclude = {'help', 'alpha', 'lspinfo', 'packer'},
+      require('ibl').setup {
+        exclude = {
+          filetypes = {'help', 'alpha', 'lspinfo', 'packer'},
+          buftypes = {'terminal', 'quickfix'},
+        }
       }
     end
   } -- }}}
@@ -363,7 +319,7 @@ return packer.startup(function(use)
   use {'akinsho/toggleterm.nvim', -- Persist and toggle multiple terminals during an editing session {{{
     config = function()
       require 'toggleterm'.setup{
-        open_mapping = [[<C-\>]],
+        open_mapping = [[<C-X>]],
         direction = 'float',
         start_in_insert = true,
         float_opts = { border = 'curved' },
@@ -387,7 +343,7 @@ return packer.startup(function(use)
       end
 
       local map = vim.api.nvim_set_keymap
-      map('n', [[<C-A-\>]], ':ToggleTerm direction=horizontal<CR>', {noremap = true})
+      map('n', [[<C-A-X>]], ':ToggleTerm direction=horizontal<CR>', {noremap = true})
 
       vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
       vim.cmd 'autocmd TermOpen * setlocal signcolumn=yes'
@@ -518,7 +474,7 @@ return packer.startup(function(use)
               nvim_lsp = '[Lsp]',
               nvim_lua = '[Lua]',
               luasnip = '[Snippet]',
-              buffer = '[Buffer]',
+              -- buffer = '[Buffer]',
               path = '[Path]',
             })[entry.source.name]
 
@@ -529,7 +485,7 @@ return packer.startup(function(use)
           { name = 'nvim_lsp' },
           { name = 'path' },
           { name = 'luasnip' },
-          { name = 'buffer' },
+          -- { name = 'buffer' },
           { name = 'nvim_lua' },
         },
       }
@@ -555,40 +511,25 @@ return packer.startup(function(use)
       local mason_lspconfig = require('mason-lspconfig')
       local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'ltex', 'dartls' }
+      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'taplo'  }
 
       require('mason').setup({
         ui = {
           icons = {
-            package_installed = " ",
-            package_pending = " ",
-            package_uninstalled = " "
+            package_installed = "󰄴 ",
+            package_pending = "󰏦 ",
+            package_uninstalled = "󰝦 "
           }
         }
       })
 
       mason_lspconfig.setup({
-        -- ensure_installed = servers
+        ensure_installed = servers
       })
 
       local setup_opts = {
         on_attach = function(_, bufnr)
-          local map = vim.api.nvim_set_keymap
-          local opts = { noremap = true, silent = true }
-
           vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-          map('n', '<leader>ld', ':lua vim.lsp.buf.definition()<CR>', opts) --> jumps to the definition of the symbol under the cursor
-          map('n', '<leader>lh', ':lua vim.lsp.buf.hover()<CR>', opts) --> information about the symbol under the cursos in a floating window
-          map('n', '<leader>li', ':lua vim.lsp.buf.implementation()<CR>', opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
-          map('n', '<leader>rn', ':lua vim.lsp.util.rename()<CR>', opts) --> renaname old_fname to new_fname
-          map('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', opts) --> selects a code action available at the current cursor position
-          map('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', opts) --> lists all the references to the symbl under the cursor in the quickfix window
-          map('n', '<leader>ld', ':lua vim.diagnostic.open_float()<CR>', opts)
-          map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
-          map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
-          map('n', '<leader>lq', ':lua vim.diagnostic.setloclist()<CR>', opts)
-          map('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<CR>', opts) --> formats the current buffer
         end,
         capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
       }
@@ -601,8 +542,24 @@ return packer.startup(function(use)
           require('lspconfig')[name].setup(setup_opts)
         end
       end
+
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+
+      map('n', '<leader>ld', ':lua vim.lsp.buf.definition()<CR>', opts) --> jumps to the definition of the symbol under the cursor
+      map('n', '<leader>lh', ':lua vim.lsp.buf.hover()<CR>', opts) --> information about the symbol under the cursos in a floating window
+      map('n', '<leader>li', ':lua vim.lsp.buf.implementation()<CR>', opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
+      map('n', '<leader>rn', ':lua vim.lsp.util.rename()<CR>', opts) --> renaname old_fname to new_fname
+      map('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', opts) --> selects a code action available at the current cursor position
+      map('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', opts) --> lists all the references to the symbl under the cursor in the quickfix window
+      map('n', '<leader>ld', ':lua vim.diagnostic.open_float()<CR>', opts)
+      map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
+      map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
+      map('n', '<leader>lq', ':lua vim.diagnostic.setloclist()<CR>', opts)
+      map('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<CR>', opts) --> formats the current buffer
     end
   }
+
   use {'neovim/nvim-lspconfig',
     config = function ()
       local map = vim.api.nvim_set_keymap
@@ -648,29 +605,55 @@ return packer.startup(function(use)
     end
   }
 
-  use {'prettier/vim-prettier', -- Prettier
-    run = 'npm install --production',
-    config = function ()
-      vim.cmd [[
-        let g:prettier#autoformat_config_present = 0
-        let g:prettier#autoformat_require_pragma = 0
-        let g:prettier#quickfix_auto_focus = 0
-        let g:prettier#quickfix_enabled = 0
-      ]]
+  -- use { 'mhartington/formatter.nvim', -- Formatter
+  --   config = function ()
+  --     local prettier_format = function ()
+  --       return {
+  --         exe = "prettierd",
+  --         args = {vim.api.nvim_buf_get_name(0)},
+  --         stdin = true
+  --       }
+  --     end
 
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        pattern = {'*.ts', '*.js', '*.vue' },
-        command = 'exec "EslintFixAll" | exec "Prettier"',
-        group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_ESLint_Prettier', {}),
-      })
+  --     local eslint_format = function ()
+  --       return {
+  --         exe = "eslint_d",
+  --         args = { '--stdin', '--stdin-filename', vim.api.nvim_buf_get_name(0), '--fix-to-stdout' },
+  --         stdin = true
+  --       }
+  --     end
 
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        pattern = { '*.json' },
-        command = 'Prettier',
-        group = vim.api.nvim_create_augroup('MyAutocmdsFormatting_Prettier', {}),
-      })
-    end
-  }
+  --     require('formatter').setup({
+  --       logging = false,
+  --       filetype = {
+  --         typescript = {
+  --           prettier_format,
+  --           eslint_format,
+  --         },
+  --         javascript = {
+  --           prettier_format,
+  --           eslint_format,
+  --         },
+  --         json = {
+  --           prettier_format,
+  --           eslint_format,
+  --         },
+  --         markdown = {
+  --           prettier_format,
+  --           eslint_format,
+  --         },
+  --       }
+  --     })
+
+  --     -- vim.cmd [[
+  --     --  augroup FormatAutogroup
+  --     --     autocmd!
+  --     --     autocmd BufWritePre *.ts,*.js,*.vue,*.json EslintFixAll
+  --     --     autocmd BufWritePost * FormatWriteLock
+  --     --   augroup end
+  --     -- ]]
+  --   end
+  -- }
     
   -- FORMATTING & DIAGNOSTICS }}}
 

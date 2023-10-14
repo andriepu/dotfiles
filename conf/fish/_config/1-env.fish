@@ -9,6 +9,7 @@ source "$HOME/.config/fish/_config/1-env._pnpm.fish"
 source "$HOME/.config/fish/_config/1-env._java.fish"
 source "$HOME/.config/fish/_config/1-env._mysql.fish"
 source "$HOME/.config/fish/_config/1-env._dart.fish"
+source "$HOME/.config/fish/_config/1-env._pyenv.fish"
 
 # Set language {{{
 
