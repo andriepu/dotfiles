@@ -319,7 +319,7 @@ return packer.startup(function(use)
   use {'akinsho/toggleterm.nvim', -- Persist and toggle multiple terminals during an editing session {{{
     config = function()
       require 'toggleterm'.setup{
-        open_mapping = [[<C-X>]],
+        open_mapping = [[<C- >]],
         direction = 'float',
         start_in_insert = true,
         float_opts = { border = 'curved' },
@@ -343,7 +343,7 @@ return packer.startup(function(use)
       end
 
       local map = vim.api.nvim_set_keymap
-      map('n', [[<C-A-X>]], ':ToggleTerm direction=horizontal<CR>', {noremap = true})
+      map('n', [[<C-S- >]], ':ToggleTerm direction=horizontal<CR>', {noremap = true})
 
       vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
       vim.cmd 'autocmd TermOpen * setlocal signcolumn=yes'
@@ -474,7 +474,7 @@ return packer.startup(function(use)
               nvim_lsp = '[Lsp]',
               nvim_lua = '[Lua]',
               luasnip = '[Snippet]',
-              -- buffer = '[Buffer]',
+              buffer = '[Buffer]',
               path = '[Path]',
             })[entry.source.name]
 
@@ -485,7 +485,7 @@ return packer.startup(function(use)
           { name = 'nvim_lsp' },
           { name = 'path' },
           { name = 'luasnip' },
-          -- { name = 'buffer' },
+          { name = 'buffer' },
           { name = 'nvim_lua' },
         },
       }

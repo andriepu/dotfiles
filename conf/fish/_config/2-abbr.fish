@@ -23,7 +23,7 @@ abbr -ag cleanupds 'find . -name ".DS_Store" -ls -delete'
 
 abbr -ag mv 'mv -v'
 abbr -ag rm 'rm -ivrf'
-abbr -ag cp 'cp -v'
+abbr -ag cp 'cp -vR'
 
 abbr -ag mkdir 'mkdir -p'
 abbr -ag md 'mkdir -p'
