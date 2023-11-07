@@ -86,15 +86,15 @@ return packer.startup(function(use)
 
   use 'jeffkreeftmeijer/vim-numbertoggle' -- Toggle between absolute and relative automatically
 
-  use {'p00f/nvim-ts-rainbow', -- Rainbow parentheses {{{
-    config = function ()
-      require("nvim-treesitter.configs").setup {
-        rainbow = {
-          enable = true,
-        }
-      }
-    end
-  } -- }}}
+  -- use {'p00f/nvim-ts-rainbow', -- Rainbow parentheses {{{
+  --   config = function ()
+  --     require("nvim-treesitter.configs").setup {
+  --       rainbow = {
+  --         enable = true,
+  --       }
+  --     }
+  --   end
+  -- } -- }}}
 
   use {'ojroques/nvim-hardline', -- Status bar {{{
     config = function() require 'hardline'.setup{} end
@@ -167,11 +167,25 @@ return packer.startup(function(use)
     config = function ()
       require 'telescope'.setup {
         defaults = {
-          file_ignore_patterns = {'node_modules', '.yarn'}
+          file_ignore_patterns = {
+            '.git/',
+            'pnpm-lock.yaml',
+            'packer_compiled'
+          },
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden'
+          }
         },
         pickers = {
           find_files = {
-            find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '-H' }
+            find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '-H' },
           },
           oldfiles = {
             cwd_only = true
@@ -188,6 +202,7 @@ return packer.startup(function(use)
 
       map('n', '<Leader>ff', ':Telescope find_files<CR>', opts)
       map('n', '<Leader>fg', ':Telescope live_grep<CR>', opts)
+      map('n', '<Leader>fc', ':Telescope grep_string<CR>', opts)
       map('n', '<Leader>fb', ':Telescope buffers<CR>', opts)
       map('n', '<Leader>fr', ':Telescope resume<CR>', opts)
     end
@@ -320,7 +335,7 @@ return packer.startup(function(use)
     config = function()
       require 'toggleterm'.setup{
         open_mapping = [[<C- >]],
-        direction = 'float',
+        direction = 'vertical',
         start_in_insert = true,
         float_opts = { border = 'curved' },
         size = function(term)
@@ -343,7 +358,7 @@ return packer.startup(function(use)
       end
 
       local map = vim.api.nvim_set_keymap
-      map('n', [[<C-S- >]], ':ToggleTerm direction=horizontal<CR>', {noremap = true})
+      map('n', [[<C-S- >]], ':ToggleTerm direction=float<CR>', {noremap = true})
 
       vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
       vim.cmd 'autocmd TermOpen * setlocal signcolumn=yes'

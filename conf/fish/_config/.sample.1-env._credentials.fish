@@ -1,0 +1,2 @@
+set -gx ATLASSIAN_CLIENT_SECRET
+

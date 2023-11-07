@@ -11,18 +11,22 @@ source "$HOME/.config/fish/_config/1-env._mysql.fish"
 source "$HOME/.config/fish/_config/1-env._dart.fish"
 source "$HOME/.config/fish/_config/1-env._pyenv.fish"
 
+source "$HOME/.config/fish/_config/.1-env._credentials.fish"
+
+##
 # Set language {{{
 
 set -gx LANG "en_US.UTF-8"
 set -gx LC_ALL "en_US.UTF-8"
 
-# }}}
+## }}}
 
+##
 # Set editor {{{
 
 set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
 
-# }}}
+## }}}
 
 # vim:set foldmethod=marker foldlevel=0:
