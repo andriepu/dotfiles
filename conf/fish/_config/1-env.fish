@@ -10,6 +10,7 @@ source "$HOME/.config/fish/_config/1-env._java.fish"
 source "$HOME/.config/fish/_config/1-env._mysql.fish"
 source "$HOME/.config/fish/_config/1-env._dart.fish"
 source "$HOME/.config/fish/_config/1-env._pyenv.fish"
+source "$HOME/.config/fish/_config/1-env._vault.fish"
 
 source "$HOME/.config/fish/_config/.1-env._credentials.fish"
 

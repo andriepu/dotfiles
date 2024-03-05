@@ -1,17 +1,7 @@
 return {
-  filetypes = {
-    'typescript',
-    'javascript',
-    'javascriptreact',
-    'typescriptreact',
-    'vue',
-  },
-  settings = {
-    css = {
-      lint = { unknownAtRules = 'ignore' },
-    },
-    scss = {
-      lint = { unknownAtRules = 'ignore' },
-    },
+  init_options = {
+    typescript = {
+      tsdk = '/Users/andriepu/Library/pnpm/global/5/node_modules/typescript/lib'
+    }
   }
 }

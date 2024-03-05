@@ -221,7 +221,8 @@ return packer.startup(function(use)
 
   use {'JoosepAlviste/nvim-ts-context-commentstring', -- Setting commentstring option based on cursor location {{{
     config = function ()
-      require'nvim-treesitter.configs'.setup {
+      require'ts_context_commentstring'.setup {
+        enable_autocmd = false,
         context_commentstring = {
           enable = true,
           config = {
@@ -230,6 +231,8 @@ return packer.startup(function(use)
           }
         },
       }
+
+      vim.g.skip_ts_context_commentstring_module = true
     end
   } -- }}}
 
@@ -238,6 +241,16 @@ return packer.startup(function(use)
   use {'windwp/nvim-autopairs', -- auto pairing {{{
     config = function ()
       require('nvim-autopairs').setup()
+    end
+  } -- }}}
+
+  use {'johmsalas/text-case.nvim', -- Change Case {{{
+    config = function()
+      require('textcase').setup {}
+      require('telescope').load_extension('textcase')
+
+      vim.api.nvim_set_keymap('n', 'ga.', '<cmd>TextCaseOpenTelescope<CR>', { desc = "Telescope" })
+      vim.api.nvim_set_keymap('v', 'ga.', "<cmd>TextCaseOpenTelescope<CR>", { desc = "Telescope" })
     end
   } -- }}}
 
@@ -526,7 +539,7 @@ return packer.startup(function(use)
       local mason_lspconfig = require('mason-lspconfig')
       local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'taplo'  }
+      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'taplo', 'tsserver' }
 
       require('mason').setup({
         ui = {

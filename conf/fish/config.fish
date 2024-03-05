@@ -14,3 +14,4 @@ set -gx GOPATH $HOME/go; set -gx GOROOT $HOME/.go; set -gx PATH $GOPATH/bin $PAT
 # Setting PATH for Python 3.10
 # The original version is saved in /Users/andriepu/.config/fish/config.fish.pysave
 set -x PATH "/Library/Frameworks/Python.framework/Versions/3.10/bin" "$PATH"
+kubectl completion fish | source
