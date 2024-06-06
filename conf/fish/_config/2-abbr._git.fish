@@ -15,4 +15,5 @@ abbr -ag glog 'clear; git log --graph --pretty='\''%Cred%H%Creset -%C(yellow)%d%
 abbr -ag gl "git pull; git pull origin (git branch | sed -n -e 's/^\* \(.*\)/\1/p')"
 abbr -ag gp "git push origin (git branch | sed -n -e 's/^\* \(.*\)/\1/p')"
 abbr -ag gpf "git push origin (git branch | sed -n -e 's/^\* \(.*\)/\1/p') -f"
-abbr -ag grc "git rebase --continue"
+abbr -ag grm 'git rebase origin/(git branch | cut -c 3- | grep -E \'^master$|^main$\')'
+abbr -ag grc 'git rebase --continue'

@@ -138,7 +138,7 @@ return packer.startup(function(use)
       }
 
       dashboard.section.buttons.val = {
-        dashboard.button( '-', '   Explore' , ':Ex<CR>'),
+        dashboard.button( '-', '   Explore' , ':Oil<CR>'),
         dashboard.button( 'r', '   Recents' , ':Telescope oldfiles<CR>'),
         dashboard.button( 'f', ' 󰱽  Find Files' , ':Telescope find_files<CR>'),
         dashboard.button( '/', ' 󱩾  Search Text' , ':Telescope live_grep<CR>'),
@@ -161,7 +161,22 @@ return packer.startup(function(use)
 
   -- FILES {{{
 
-  use 'tpope/vim-vinegar' -- File explorer
+  use {
+    'stevearc/oil.nvim',
+    config = function()
+      require('oil').setup {
+        columns = {
+          'icon',
+          'size',
+        },
+        view_options = {
+          -- show_hidden = true, -- Disable by default. Just press "g." to show hidden files
+        }
+      }
+
+      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+    end,
+  }
 
   use {'nvim-telescope/telescope.nvim', -- Fuzzy finder {{{
     config = function ()
@@ -348,7 +363,7 @@ return packer.startup(function(use)
     config = function()
       require 'toggleterm'.setup{
         open_mapping = [[<C- >]],
-        direction = 'vertical',
+        direction = 'float',
         start_in_insert = true,
         float_opts = { border = 'curved' },
         size = function(term)
@@ -371,7 +386,7 @@ return packer.startup(function(use)
       end
 
       local map = vim.api.nvim_set_keymap
-      map('n', [[<C-S- >]], ':ToggleTerm direction=float<CR>', {noremap = true})
+      map('n', [[<C-S- >]], ':ToggleTerm direction=vertical<CR>', {noremap = true})
 
       vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
       vim.cmd 'autocmd TermOpen * setlocal signcolumn=yes'
@@ -539,7 +554,7 @@ return packer.startup(function(use)
       local mason_lspconfig = require('mason-lspconfig')
       local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'taplo', 'tsserver' }
+      local servers = { 'bashls', 'eslint', 'jsonls', 'tailwindcss', 'volar', 'tsserver' }
 
       require('mason').setup({
         ui = {
@@ -585,6 +600,8 @@ return packer.startup(function(use)
       map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
       map('n', '<leader>lq', ':lua vim.diagnostic.setloclist()<CR>', opts)
       map('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<CR>', opts) --> formats the current buffer
+
+      map('n', '<leader>fp', ':!prettier % --write; eslint % --fix<CR><CR>', opts)
     end
   }
 

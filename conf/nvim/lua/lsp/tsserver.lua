@@ -11,6 +11,6 @@ return {
   filetypes = {
     "javascript",
     "typescript",
-    "vue",
+    "vue"
   },
 }

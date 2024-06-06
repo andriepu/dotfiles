@@ -4,6 +4,7 @@ source "$HOME/.config/fish/_config/2-abbr._work.fish"
 source "$HOME/.config/fish/_config/2-abbr._kubectl.fish"
 source "$HOME/.config/fish/_config/2-abbr._ssh.fish"
 source "$HOME/.config/fish/_config/2-abbr._pnpm.fish"
+source "$HOME/.config/fish/_config/2-abbr._nvm.fish"
 
 # Editor {{{
 
