@@ -8,7 +8,7 @@ def _draw_left_icon(screen: Screen, draw_data: DrawData) -> int:
     orig_fg, orig_bg = screen.cursor.fg, screen.cursor.bg
 
     screen.cursor.fg = orig_bg
-    screen.cursor.bg = draw_data.default_bg
+    screen.cursor.bg = draw_data.default_bg.rgb
     screen.draw('')
     screen.cursor.fg, screen.cursor.bg = orig_fg, orig_bg
 
@@ -20,7 +20,7 @@ def _draw_right_icon(screen: Screen, draw_data: DrawData) -> int:
     orig_fg, orig_bg = screen.cursor.fg, screen.cursor.bg
 
     screen.cursor.fg = orig_bg
-    screen.cursor.bg = draw_data.default_bg
+    screen.cursor.bg = draw_data.default_bg.rgb
     screen.draw('')
     screen.cursor.fg, screen.cursor.bg = orig_fg, orig_bg
 

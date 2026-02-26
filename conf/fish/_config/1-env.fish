@@ -2,7 +2,7 @@
 
 source "$HOME/.config/fish/_config/1-env._homebrew.fish"
 source "$HOME/.config/fish/_config/1-env._node.fish"
-source "$HOME/.config/fish/_config/1-env._exa.fish"
+source "$HOME/.config/fish/_config/1-env._eza.fish"
 source "$HOME/.config/fish/_config/1-env._openvpn.fish"
 source "$HOME/.config/fish/_config/1-env._gcloud.fish"
 source "$HOME/.config/fish/_config/1-env._pnpm.fish"
@@ -10,7 +10,10 @@ source "$HOME/.config/fish/_config/1-env._java.fish"
 source "$HOME/.config/fish/_config/1-env._mysql.fish"
 source "$HOME/.config/fish/_config/1-env._dart.fish"
 source "$HOME/.config/fish/_config/1-env._pyenv.fish"
+source "$HOME/.config/fish/_config/1-env._phpvm.fish"
 source "$HOME/.config/fish/_config/1-env._vault.fish"
+source "$HOME/.config/fish/_config/1-env._go.fish"
+source "$HOME/.config/fish/_config/1-env._cursor.fish"
 
 source "$HOME/.config/fish/_config/.1-env._credentials.fish"
 

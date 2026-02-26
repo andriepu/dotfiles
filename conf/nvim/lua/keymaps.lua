@@ -19,6 +19,7 @@ vim.g.maplocalleader = ','
 
 -- General
 map('i', 'jk', '<Esc>', opts) -- set "jk" as "escape" key
+map('n', '<Leader><Space>', ':noh<CR>', opts) -- Hide search highlight
 
 -- Editing
 map('n', 're', '<C-r>', opts) -- redo

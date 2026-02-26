@@ -15,3 +15,9 @@ set -gx GOPATH $HOME/go; set -gx GOROOT $HOME/.go; set -gx PATH $GOPATH/bin $PAT
 # The original version is saved in /Users/andriepu/.config/fish/config.fish.pysave
 set -x PATH "/Library/Frameworks/Python.framework/Versions/3.10/bin" "$PATH"
 kubectl completion fish | source
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/andriepu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/andriepu/Downloads/google-cloud-sdk/path.fish.inc'; end
+
+# Added by Antigravity
+fish_add_path /Users/andriepu/.antigravity/antigravity/bin

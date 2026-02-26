@@ -1,0 +1,2 @@
+set -gx EZA_ICON_SPACING 2
+
